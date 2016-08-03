@@ -58,36 +58,37 @@ for(i in 1:length(BofoDem)){
   
   ##### OK, Start thinking about plotting! Use this awesome guide: http://personal.tcu.edu/kylewalker/interactive-flow-visualization-in-r.html
   
-  # ## Approach one, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy
-  # ## But first, I have to remove flows to self, since these show up as a line across map:
-  # df <- b[b$From != b$To,]
-  # df <- df %>% filter(!is.na(toLon)&!is.na(fromLon))
-  # 
-  # library(geosphere)
-  # 
-  # flows <- gcIntermediate(df[,5:4], df[,7:6],n=20,sp = TRUE, addStartEnd = T,breakAtDateLine=T)
-  # flows$counts <- df$Val/max(df$Val)*10
-  # flows$origins <- df$From
-  # flows$destinations <- df$To
-  # 
-  # library(leaflet)
-  # library(RColorBrewer)
-  # 
-  # hover <- paste0(flows$origins, " to ", 
-  #                 flows$destinations, ': ', 
-  #                 as.character(round(flows$counts*max(df$Val)/10),1))
-  # 
-  # pal <- colorFactor(brewer.pal(4, 'Set2'), flows$origins)
-  # leaflet() %>%
-  #   addProviderTiles('CartoDB.Positron') %>%
-  #   # addProviderTiles('Thunderforest.TransportDark') %>%
-  #   # addProviderTiles('Stamen.TonerBackground') %>%
-  #   # addProviderTiles('CartoDB.DarkMatterNoLabels') %>%
-  #   # addProviderTiles('NASAGIBS.ViirsEarthAtNight2012') %>%
-  #   addPolylines(data = flows, weight = ~counts, 
-  #                group = ~origins, color = ~pal(origins),popup = ~hover) %>%
-  #   addLayersControl(overlayGroups = unique(flows$origins), 
-  #                    options = layersControlOptions(collapsed = T))
+  ## Approach one, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy
+  ## But first, I have to remove flows to self, since these show up as a line across map:
+  df <- b[b$From != b$To,]
+  df <- df %>% filter(!is.na(toLon)&!is.na(fromLon))
+
+  library(geosphere)
+
+  flows <- gcIntermediate(df[,5:4], df[,7:6],n=20,sp = TRUE, addStartEnd = T,breakAtDateLine=T)
+  flows$counts <- df$Val/max(df$Val)*10
+  flows$origins <- df$From
+  flows$destinations <- df$To
+
+  library(leaflet)
+  library(RColorBrewer)
+
+  hover <- paste0(flows$origins, " to ",
+                  flows$destinations, ': ',
+                  as.character(round(flows$counts*max(df$Val)/10),1))
+
+  pal <- colorFactor(brewer.pal(4, 'Set2'), flows$origins)
+  
+  leaflet() %>%
+    # addProviderTiles('CartoDB.Positron') %>%
+    # addProviderTiles('Thunderforest.TransportDark') %>%
+    addProviderTiles('Stamen.TonerBackground') %>%
+    # addProviderTiles('CartoDB.DarkMatterNoLabels') %>%
+    # addProviderTiles('NASAGIBS.ViirsEarthAtNight2012') %>%
+    addPolylines(data = flows, weight = ~counts,
+                 group = ~origins, color = ~pal(origins),popup = ~hover) %>%
+    addLayersControl(overlayGroups = unique(flows$origins),
+                     options = layersControlOptions(collapsed = T))
   
   
   library(threejs) # devtools::install_github("bwlewis/rthreejs")
