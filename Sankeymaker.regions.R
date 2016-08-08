@@ -4,73 +4,73 @@ library(dplyr)
 ## Remove scientific notation
 options(scipen=999)
 
-############# FILE 1 ################
-## Read data in
-a <- read.csv("regions_sourceofprod.csv")
-str(a)
-a[,1] <- as.character(a[,1])
-a[,2] <- as.character(a[,2])
-a[,3] <- as.numeric(a[,3])
-
-## Step 0, make 2 levels
-a[,2] <- paste(">",a[,2],sep="")
-
-## Step 1, rename nicely
-names(a) <- c("From","To","Value") 
-
-# ## And now see what the biggest players are:
-# a %>% filter(Val>100000) -> a
-
-## get nodes and edges:
-source("https://gist.githubusercontent.com/mexindian/a77102065c75c69c22216f43cc3761be/raw/466e9702d4896121d76a007ad504afeef0a8f09e/easyModeNodeEdge.R")
-nodesEdges <- easyMode(a,0)
-nodes <- nodesEdges[[1]]
-edges <- nodesEdges[[2]]
-
-edges$thingie <- sub(' ', '', nodes[edges$from + 1, 'name'])
-
-## this bug cost me about 4 hours to find.
-edges <-as.data.frame(edges)
-
-# Create graph
-c <- sankeyNetwork(Links = edges, Nodes = nodes, 
-              Source = 'from',Target = 'to', Value = 'value', NodeID = 'name',
-              LinkGroup = 'thingie',NodeGroup = NULL, fontSize = 15)
-saveNetwork(c,"sankey.regions_sourceofprod.html",selfcontained = T)
-
-############## FILE 2 ##########
-
-a <- read.csv("interchange_CGIARandCIAT.csv")
-
-## Reshape
-library(tidyr)
-b <- gather(data = a,key = X)
-
-## Clean a bit, and make second column a destination
-b[,1] <- gsub("\n",".",b[,1])
-b[,2] <- gsub("\n",".",b[,2])
-
-b[,2] <- paste(">",b[,2],sep="")
-
-names(b) <- c("From","To","Value") 
-
-source("https://gist.githubusercontent.com/mexindian/a77102065c75c69c22216f43cc3761be/raw/466e9702d4896121d76a007ad504afeef0a8f09e/easyModeNodeEdge.R")
-nodesEdges <- easyMode(b,0)
-nodes <- nodesEdges[[1]]
-edges <- nodesEdges[[2]]
-
-edges$thingie <- sub(' ', '', nodes[edges$from + 1, 'name'])
-
-## this bug cost me about 4 hours to find.
-edges <-as.data.frame(edges)
-
-# Create graph
-d <- sankeyNetwork(Links = edges, Nodes = nodes, 
-                   Source = 'from',Target = 'to', Value = 'value', NodeID = 'name',
-                   LinkGroup = 'thingie',NodeGroup = NULL, fontSize = 15)
-saveNetwork(d,"sankey.interchange_CGIARandCIAT.html",selfcontained = T)
-
-## Seems to be same to file 1.
+# ############# FILE 1 ################
+# ## Read data in
+# a <- read.csv("regions_sourceofprod.csv")
+# str(a)
+# a[,1] <- as.character(a[,1])
+# a[,2] <- as.character(a[,2])
+# a[,3] <- as.numeric(a[,3])
+# 
+# ## Step 0, make 2 levels
+# a[,2] <- paste(">",a[,2],sep="")
+# 
+# ## Step 1, rename nicely
+# names(a) <- c("From","To","Value") 
+# 
+# # ## And now see what the biggest players are:
+# # a %>% filter(Val>100000) -> a
+# 
+# ## get nodes and edges:
+# source("https://gist.githubusercontent.com/mexindian/a77102065c75c69c22216f43cc3761be/raw/466e9702d4896121d76a007ad504afeef0a8f09e/easyModeNodeEdge.R")
+# nodesEdges <- easyMode(a,0)
+# nodes <- nodesEdges[[1]]
+# edges <- nodesEdges[[2]]
+# 
+# edges$thingie <- sub(' ', '', nodes[edges$from + 1, 'name'])
+# 
+# ## this bug cost me about 4 hours to find.
+# edges <-as.data.frame(edges)
+# 
+# # Create graph
+# c <- sankeyNetwork(Links = edges, Nodes = nodes, 
+#               Source = 'from',Target = 'to', Value = 'value', NodeID = 'name',
+#               LinkGroup = 'thingie',NodeGroup = NULL, fontSize = 15)
+# saveNetwork(c,"sankey.regions_sourceofprod.html",selfcontained = T)
+# 
+# ############## FILE 2 ##########
+# 
+# a <- read.csv("interchange_CGIARandCIAT.csv")
+# 
+# ## Reshape
+# library(tidyr)
+# b <- gather(data = a,key = X)
+# 
+# ## Clean a bit, and make second column a destination
+# b[,1] <- gsub("\n",".",b[,1])
+# b[,2] <- gsub("\n",".",b[,2])
+# 
+# b[,2] <- paste(">",b[,2],sep="")
+# 
+# names(b) <- c("From","To","Value") 
+# 
+# source("https://gist.githubusercontent.com/mexindian/a77102065c75c69c22216f43cc3761be/raw/466e9702d4896121d76a007ad504afeef0a8f09e/easyModeNodeEdge.R")
+# nodesEdges <- easyMode(b,0)
+# nodes <- nodesEdges[[1]]
+# edges <- nodesEdges[[2]]
+# 
+# edges$thingie <- sub(' ', '', nodes[edges$from + 1, 'name'])
+# 
+# ## this bug cost me about 4 hours to find.
+# edges <-as.data.frame(edges)
+# 
+# # Create graph
+# d <- sankeyNetwork(Links = edges, Nodes = nodes, 
+#                    Source = 'from',Target = 'to', Value = 'value', NodeID = 'name',
+#                    LinkGroup = 'thingie',NodeGroup = NULL, fontSize = 15)
+# saveNetwork(d,"sankey.interchange_CGIARandCIAT.html",selfcontained = T)
+# 
+# ## Seems to be same to file 1.
 
 ####################  Hrm... get my own regions and do the first file ####
 
