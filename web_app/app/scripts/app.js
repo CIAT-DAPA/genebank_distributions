@@ -14,6 +14,9 @@ angular
     'ngCookies',
     'ngRoute'
   ])
+  .value('config',{
+      data_genebanks: 'data/genebanks.json'
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -25,6 +28,11 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .when('/sankey', {
+        templateUrl: 'views/sankey.html',
+        controller: 'SankeyCtrl',
+        controllerAs: 'csankey'
       })
       .otherwise({
         redirectTo: '/'
