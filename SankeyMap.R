@@ -83,12 +83,13 @@ i=1
                  aes(x = fromLon, y = fromLat,
                      xend = toLon, yend = toLat,
                      size=Val, colour=To))
-
-# ggplotly()  
   
+  ### ggplotly test
   
-  
-  
+  viz <- ggplot(df) + borders("world", fill='black', colour = "black") + coord_equal()
+  viz <- viz + geom_segment(data = df, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(10,"cm"))) + theme_bw()
+  viz
+  ggplotly(viz)
   
   ############## Approach one and a half, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ###################
   library(geosphere)
