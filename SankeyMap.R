@@ -83,12 +83,34 @@ i=1
                  aes(x = fromLon, y = fromLat,
                      xend = toLon, yend = toLat,
                      size=Val, colour=To))
-
-# ggplotly()  
   
+  ggplot(df)  + borders("world") + coord_equal() +
+    geom_map(data=world_map, map=world_map,
+             aes(x=long, y=lat, map_id=region),
+             fill="#000000", color="#000000", size=0.15) +
+    geom_curve(data = df, alpha = .2,
+               aes(x = fromLon, y = fromLat,
+                   xend = toLon, yend = toLat,
+                   size=Val, colour=To),arrow = arrow(angle = 10,length = unit(0.13, "npc")))
   
+  ### ggplotly test
   
+  viz <- ggplot(df) + borders("world", fill='black', colour = "black") + coord_equal()
+  viz <- viz + geom_segment(data = df, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(0.13, "npc"))) + theme_bw()
+  viz <- viz + guides(colour = FALSE) + guides(size = FALSE)
+  ggplotly(viz)
   
+  viz2 <- ggplot(df2) + borders("world", fill='black', colour = "black") + coord_equal()
+  viz2 <- viz2 + geom_segment(data = df2, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(0.13, "npc"))) + theme_bw()
+  viz2 <- viz2 + guides(colour = FALSE) + guides(size = FALSE)
+  ggplotly(viz2)
+  
+  p <- subplot(
+    ggplotly(viz),
+    ggplotly(viz2),
+    margin = 0.01
+  ) %>% layout(showlegend = FALSE)
+  p
   
   ############## Approach one and a half, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ###################
   library(geosphere)
