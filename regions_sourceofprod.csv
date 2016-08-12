@@ -1,0 +1,521 @@
+"Region_origin","Region_recipient","Average"
+"West Asia","West Asia",1444.39317073171
+"West Asia","SE Mediterranean",369.207804878049
+"West Asia","Temp. S. America",14.8356794425087
+"West Asia","Central Asia",16.52
+"West Asia","Australia New Zealand",214.213240418118
+"West Asia","NW Europe",555.523205574913
+"West Asia","South Asia",1067.6
+"West Asia","Central America",69.4712195121951
+"West Asia","Andes",51.8565853658537
+"West Asia","Trop. S. America",24.1894076655052
+"West Asia","SE Europe",376.296585365854
+"West Asia","Southeast Asia",33.9307317073171
+"West Asia","North America",428.019512195122
+"West Asia","East Asia",192.807804878049
+"West Asia","East Africa",205.228013937282
+"West Asia","West Africa",7.70439024390244
+"West Asia","NE Europe",335.050731707317
+"West Asia","SW Europe",190.386341463415
+"West Asia","Southern Africa",15.2614634146341
+"West Asia","Caribbean",5.40878048780487
+"SE Europe","Central Asia",5.52
+"SE Europe","Australia New Zealand",81.2243902439024
+"SE Europe","NW Europe",149.792195121951
+"SE Europe","South Asia",481.314146341463
+"SE Europe","Trop. S. America",10.6663414634146
+"SE Europe","North America",112.136585365854
+"SE Europe","East Asia",64.6829268292683
+"SE Europe","SE Mediterranean",127.2
+"SE Europe","East Africa",154.039024390244
+"SE Europe","West Asia",81.4643902439024
+"SE Europe","SW Europe",25.8848780487805
+"SE Europe","NE Europe",110.488780487805
+"SE Mediterranean","SE Europe",41.92
+"SE Mediterranean","SE Mediterranean",812.16
+"SE Mediterranean","Temp. S. America",3.16
+"SE Mediterranean","Central Asia",2.16
+"SE Mediterranean","Australia New Zealand",55.72
+"SE Mediterranean","NW Europe",189.841951219512
+"SE Mediterranean","South Asia",100.008780487805
+"SE Mediterranean","Central America",7.89951219512195
+"SE Mediterranean","Andes",9.75317073170732
+"SE Mediterranean","Trop. S. America",4.18439024390244
+"SE Mediterranean","North America",170.946341463415
+"SE Mediterranean","East Asia",26.5287804878049
+"SE Mediterranean","NE Europe",88.64
+"SE Mediterranean","East Africa",68.0575609756097
+"SE Mediterranean","West Asia",97.5843902439024
+"SE Mediterranean","SW Europe",28.2107317073171
+"SE Mediterranean","Caribbean",0.0731707317073171
+"SE Mediterranean","Southeast Asia",1.36
+"SE Mediterranean","Southern Africa",3.04
+"Central Africa","Trop. S. America",9.59066202090592
+"Central Africa","East Asia",16.7453658536585
+"Central Africa","Andes",3.87331010452962
+"Central Africa","Central America",6.17393728222996
+"Central Africa","NW Europe",10.5117770034843
+"Central Africa","South Asia",348.555121951219
+"Central Africa","Southeast Asia",12.6747038327526
+"Central Africa","SE Europe",303.923902439024
+"Central Africa","North America",24.9120557491289
+"Caribbean","Temp. S. America",2.11965543941154
+"Caribbean","Australia New Zealand",1.74023615950445
+"Caribbean","NW Europe",7.03306620209059
+"Caribbean","West Africa",5.02206349206349
+"Caribbean","Andes",12.4462795199381
+"Caribbean","Trop. S. America",8.18184668989547
+"Caribbean","East Asia",11.3666008517228
+"Caribbean","Central America",11.9252884243128
+"Caribbean","Caribbean",9.1440960123887
+"Caribbean","East Africa",10.8945760743322
+"Caribbean","South Asia",39.9951219512195
+"Caribbean","West Asia",1.33853658536585
+"Caribbean","Southeast Asia",7.36417344173442
+"Caribbean","North America",15.2849361207898
+"Temp. S. America","West Asia",4.07512195121952
+"Temp. S. America","Temp. S. America",10.9652884243128
+"Temp. S. America","Central Asia",1.72
+"Temp. S. America","Australia New Zealand",1.69364692218351
+"Temp. S. America","NW Europe",10.2653735965931
+"Temp. S. America","Caribbean",3.48547425474255
+"Temp. S. America","South Asia",58.3009059233449
+"Temp. S. America","NE Europe",2.78076655052264
+"Temp. S. America","West Africa",4.8415331010453
+"Temp. S. America","Andes",10.692597754549
+"Temp. S. America","Southern Africa",21.1225087108014
+"Temp. S. America","Trop. S. America",6.32557491289199
+"Temp. S. America","SE Europe",33.9219512195122
+"Temp. S. America","East Africa",6.98129694154085
+"Temp. S. America","Central Africa",1.38439024390244
+"Temp. S. America","North America",21.1035849787069
+"Temp. S. America","East Asia",12.1981958962447
+"Temp. S. America","IOI",0.88
+"Temp. S. America","Central America",8.99283778552071
+"Temp. S. America","SE Mediterranean",0.828571428571429
+"Temp. S. America","Trop. Pacific Region",0.4
+"Temp. S. America","Southeast Asia",13.2326945412311
+"Temp. S. America","SW Europe",7.77170731707317
+"Central Asia","SE Mediterranean",17.52
+"Central Asia","Temp. S. America",0.52
+"Central Asia","Central Asia",46.4
+"Central Asia","Australia New Zealand",153.96
+"Central Asia","NW Europe",58.7619512195122
+"Central Asia","South Asia",25.4946341463415
+"Central Asia","Trop. S. America",1.73658536585366
+"Central Asia","SE Europe",1.6
+"Central Asia","North America",58.6360975609756
+"Central Asia","East Asia",27.7151219512195
+"Central Asia","NE Europe",39.96
+"Central Asia","East Africa",9.39317073170732
+"Central Asia","West Asia",54.5043902439024
+"Central Asia","SW Europe",7.92
+"Central Asia","Central America",5.21463414634146
+"Central Asia","Southern Africa",0.977560975609756
+"Australia New Zealand","SE Europe",22.9775609756098
+"Australia New Zealand","SE Mediterranean",4.22439024390244
+"Australia New Zealand","Central Africa",0.92
+"Australia New Zealand","Temp. S. America",0.490731707317073
+"Australia New Zealand","Australia New Zealand",4.19317073170732
+"Australia New Zealand","NW Europe",11.9151219512195
+"Australia New Zealand","South Asia",53.4263414634146
+"Australia New Zealand","NE Europe",1.67317073170732
+"Australia New Zealand","West Africa",1.64
+"Australia New Zealand","Andes",2.73686411149826
+"Australia New Zealand","Southern Africa",4.60780487804879
+"Australia New Zealand","Trop. S. America",1.89463414634146
+"Australia New Zealand","East Africa",21.1014634146341
+"Australia New Zealand","North America",14.1891289198606
+"Australia New Zealand","East Asia",34.9346341463415
+"Australia New Zealand","Central America",1.78829268292683
+"Australia New Zealand","Caribbean",0.583414634146341
+"Australia New Zealand","Southeast Asia",5.02439024390244
+"Australia New Zealand","West Asia",4.6019512195122
+"Australia New Zealand","SW Europe",3.43317073170732
+"Australia New Zealand","Central Asia",0.04
+"Australia New Zealand","IOI",0.68
+"Australia New Zealand","Trop. Pacific Region",3.28
+"NW Europe","SE Mediterranean",55.5843902439024
+"NW Europe","Temp. S. America",7.97031358885019
+"NW Europe","Australia New Zealand",36.0695470383275
+"NW Europe","NW Europe",29.8278745644599
+"NW Europe","South Asia",59.849756097561
+"NW Europe","Andes",36.7742160278746
+"NW Europe","Southern Africa",8.54369337979094
+"NW Europe","Trop. S. America",16.3095470383275
+"NW Europe","North America",44.9825783972126
+"NW Europe","East Asia",18.0370731707317
+"NW Europe","Central Africa",1.22174216027875
+"NW Europe","East Africa",21.4249477351916
+"NW Europe","West Asia",37.3248780487805
+"NW Europe","SW Europe",12.769756097561
+"NW Europe","IOI",1.22439024390244
+"NW Europe","Central America",31.2020905923345
+"NW Europe","Southeast Asia",8.41505226480836
+"NW Europe","NE Europe",15.969756097561
+"Central Asia","Southeast Asia",0.4
+"South Asia","Australia New Zealand",33.7063414634147
+"South Asia","NW Europe",278.879163763066
+"South Asia","South Asia",5085.39512195122
+"South Asia","Central America",14.5793728222997
+"South Asia","West Africa",63.6347038327526
+"South Asia","Trop. S. America",23.7135888501743
+"South Asia","East Africa",132.67456445993
+"South Asia","Southeast Asia",252.320418118467
+"South Asia","Central Africa",2.58174216027875
+"South Asia","North America",207.074146341463
+"South Asia","East Asia",511.877630662021
+"South Asia","Andes",14.0858536585366
+"South Asia","Caribbean",6.80445993031359
+"South Asia","SE Mediterranean",42.2243902439024
+"South Asia","NE Europe",48.9843902439024
+"South Asia","West Asia",67.7661324041812
+"South Asia","SW Europe",29.9151219512195
+"South Asia","SE Europe",1858.55707317073
+"South Asia","IOI",1.9619512195122
+"South Asia","Southern Africa",52.1082926829268
+"South Asia","Trop. Pacific Region",1.24
+"South Asia","Central Asia",8.72
+"Caribbean","SE Europe",36.9639024390244
+"NE Europe","Temp. S. America",2.08975609756097
+"NE Europe","Australia New Zealand",90.2507317073171
+"NE Europe","NW Europe",30.1121951219512
+"NE Europe","South Asia",96.88
+"NE Europe","SE Europe",41.6136585365854
+"NE Europe","East Africa",19.5541463414634
+"NE Europe","SE Mediterranean",24.3853658536585
+"NE Europe","West Asia",56.8614634146341
+"NE Europe","NE Europe",35.9687804878049
+"NE Europe","North America",84.3863414634146
+"NW Europe","SE Europe",12.0419512195122
+"NW Europe","Caribbean",6.49268292682927
+"NW Europe","West Africa",2.65756097560976
+"Central America","Central Africa",9.50578397212544
+"Central America","Caribbean",61.4334339914828
+"Central America","Temp. S. America",13.4345644599303
+"Central America","Australia New Zealand",15.6737166085946
+"Central America","NW Europe",107.047135114208
+"Central America","South Asia",128.955346496322
+"Central America","West Africa",17.47027100271
+"Central America","Andes",216.188052651955
+"Central America","Southern Africa",56.8616337591947
+"Central America","Trop. S. America",109.059721254355
+"Central America","East Africa",91.4757065427798
+"Central America","North America",228.098029423151
+"Central America","East Asia",82.0685559427023
+"Central America","Central America",360.54543554007
+"Central America","SE Mediterranean",5.97072009291522
+"Central America","Southeast Asia",20.5054703832753
+"Central America","SW Europe",46.6072473867595
+"Central America","IOI",4.56724738675958
+"Central America","West Asia",30.2868292682927
+"West Africa","South Asia",965.808253968254
+"West Africa","NW Europe",54.0983042973287
+"West Africa","North America",127.146744096012
+"West Africa","West Africa",915.025923344948
+"West Africa","East Asia",140.287030584592
+"West Africa","Central Africa",62.078606271777
+"West Africa","East Africa",120.325284552846
+"West Africa","Southeast Asia",51.1827487417731
+"West Africa","SW Europe",4.66104529616725
+"West Africa","SE Europe",639.388571428571
+"West Africa","Southern Africa",60.8761827332559
+"West Africa","West Asia",12.0971428571429
+"West Africa","NE Europe",4.61714285714286
+"Andes","SE Mediterranean",61.524425087108
+"Andes","Central Africa",46.2845993031359
+"Andes","Temp. S. America",121.601606658924
+"Andes","Australia New Zealand",76.3599303135889
+"Andes","NW Europe",271.305458768873
+"Andes","South Asia",360.551536972513
+"Andes","West Africa",74.9647812620983
+"Andes","Andes",926.568850174215
+"Andes","Southern Africa",110.441114982579
+"Andes","Trop. S. America",288.791347270615
+"Andes","SE Europe",84.4118466898955
+"Andes","East Africa",283.716701509872
+"Andes","North America",258.41560588463
+"Andes","East Asia",282.873774680604
+"Andes","Central America",419.463693379791
+"Andes","Caribbean",110.750282617112
+"Andes","NE Europe",40.1491289198606
+"Andes","Trop. Pacific Region",14.7255555555555
+"Andes","Southeast Asia",184.41299651568
+"Andes","West Asia",130.223921796361
+"Andes","SW Europe",68.176198219125
+"Andes","IOI",50.1295470383276
+"SE Europe","Temp. S. America",3.02341463414634
+"SE Europe","SE Europe",445.634146341463
+"SE Europe","Andes",20.5453658536585
+"Southern Africa","NW Europe",28.6278745644599
+"Southern Africa","Trop. S. America",35.5042508710801
+"Southern Africa","North America",80.2140766550522
+"Southern Africa","East Asia",33.6445993031359
+"Southern Africa","SE Mediterranean",4.42592334494774
+"Southern Africa","South Asia",792.783275261323
+"Southern Africa","SW Europe",3.57324041811847
+"Southern Africa","West Asia",7.58383275261324
+"Southern Africa","SE Europe",701.088083623693
+"Southern Africa","West Africa",8.38285714285714
+"Southern Africa","Southeast Asia",49.8331707317073
+"Southern Africa","NE Europe",3.67163763066202
+"Southern Africa","East Africa",95.1239024390243
+"Southern Africa","Southern Africa",198.959581881533
+"Trop. S. America","West Asia",8.31474641889276
+"Trop. S. America","SE Mediterranean",2.40481223383663
+"Trop. S. America","Central Africa",12.1206968641115
+"Trop. S. America","Caribbean",51.8302593883082
+"Trop. S. America","Temp. S. America",11.9662214479288
+"Trop. S. America","Australia New Zealand",38.9402710027101
+"Trop. S. America","NW Europe",70.0036314363143
+"Trop. S. America","South Asia",120.198571428571
+"Trop. S. America","NE Europe",4.61240418118467
+"Trop. S. America","Central America",78.867483546264
+"Trop. S. America","West Africa",50.7530352303523
+"Trop. S. America","Andes",204.519717382889
+"Trop. S. America","Southern Africa",49.1767169957414
+"Trop. S. America","Trop. S. America",164.566600851723
+"Trop. S. America","SE Europe",51.8583972125436
+"Trop. S. America","East Africa",92.2658536585366
+"Trop. S. America","North America",64.7557684862563
+"Trop. S. America","East Asia",75.4193728222996
+"Trop. S. America","Trop. Pacific Region",1.06063492063492
+"Trop. S. America","Southeast Asia",54.87656213705
+"Trop. S. America","SW Europe",6.89969415408439
+"Trop. S. America","IOI",1.9188850174216
+"Trop. S. America","Central Asia",1.72
+"IOI","South Asia",21.7173519163763
+"IOI","NW Europe",2.54857142857143
+"Southeast Asia","South Asia",350.782009291522
+"Southeast Asia","Trop. S. America",25.7687224157956
+"Southeast Asia","East Asia",728.737297715834
+"Southeast Asia","NW Europe",118.757657762292
+"Southeast Asia","Southeast Asia",698.006349206349
+"Southeast Asia","West Asia",21.84
+"Southeast Asia","North America",193.64945799458
+"SE Europe","Central America",48.9492682926829
+"SE Europe","Southeast Asia",68.1843902439024
+"SE Europe","Southern Africa",72.7541463414634
+"SE Europe","Caribbean",35.9434146341463
+"West Africa","Temp. S. America",2.62871080139373
+"West Africa","Trop. S. America",24.4840572977158
+"West Africa","Caribbean",5.97433217189314
+"West Africa","SE Mediterranean",16.2175609756098
+"West Africa","IOI",7.41756097560976
+"West Africa","Australia New Zealand",3.28825396825396
+"West Africa","Andes",16.4530391018196
+"West Africa","Central Asia",0.84
+"East Africa","Central Africa",5.81602787456446
+"East Africa","Temp. S. America",10.2880836236934
+"East Africa","Australia New Zealand",44.5678048780487
+"East Africa","South Asia",1086.84362369338
+"East Africa","NW Europe",238.832613240418
+"East Africa","West Africa",18.44
+"East Africa","Andes",53.0253658536585
+"East Africa","Southern Africa",62.1038327526132
+"East Africa","Trop. S. America",46.2374912891986
+"East Africa","Caribbean",7.58606271777003
+"East Africa","SE Europe",1078.0656445993
+"East Africa","East Africa",326.24
+"East Africa","North America",204.207665505227
+"East Africa","East Asia",59.6797212543554
+"East Africa","Central America",23.3952613240418
+"East Africa","SE Mediterranean",139.938675958188
+"East Africa","Trop. Pacific Region",0.268571428571429
+"East Africa","NE Europe",19.9287804878049
+"East Africa","West Asia",69.1106620209059
+"East Africa","IOI",5.52
+"East Africa","Southeast Asia",37.2103135888502
+"Southeast Asia","Australia New Zealand",9.02391405342624
+"Southeast Asia","East Africa",56.685818815331
+"Southeast Asia","Andes",65.1840069686411
+"Southeast Asia","NE Europe",6.44
+"Southeast Asia","SE Mediterranean",14.4872473867596
+"Southeast Asia","SW Europe",14.0457142857143
+"Southeast Asia","West Africa",125.030789779326
+"Southeast Asia","Trop. Pacific Region",2.46777777777778
+"Southeast Asia","Central Asia",4.48
+"Central Africa","Temp. S. America",0.618397212543554
+"Central Africa","Australia New Zealand",0.604599303135888
+"Central Africa","West Africa",2.76
+"Central Africa","Central Africa",0.768780487804878
+"Central Africa","Caribbean",1.82689895470383
+"Central Africa","NE Europe",1.05031358885017
+"Central Africa","SE Mediterranean",1.12
+"Central Africa","East Africa",9.57170731707317
+"Central Africa","West Asia",2.89073170731707
+"Central Africa","SW Europe",1.23707317073171
+"Central Africa","Southern Africa",6.11540069686411
+"Central Africa","IOI",0.339512195121951
+"Central Africa","Trop. Pacific Region",0.12
+"North America","SE Mediterranean",22.7414634146341
+"North America","Temp. S. America",12.0480836236934
+"North America","Australia New Zealand",10.2602516453736
+"North America","NW Europe",45.7179829655439
+"North America","South Asia",542.208083623693
+"North America","NE Europe",15.6956097560976
+"North America","Andes",52.0282384823848
+"North America","Trop. S. America",33.6250871080139
+"North America","SE Europe",423.357073170732
+"North America","North America",97.8156097560976
+"North America","East Asia",79.1829965156794
+"North America","Central America",36.1829965156794
+"North America","Caribbean",18.352516453736
+"North America","East Africa",35.5454703832753
+"North America","West Africa",6.97198606271777
+"North America","West Asia",43.1017421602788
+"North America","SW Europe",25.7154006968642
+"North America","Southern Africa",79.0480836236934
+"North America","Southeast Asia",71.3825551684088
+"Andes","Central Asia",10.12
+"East Asia","Temp. S. America",7.53128919860627
+"East Asia","Australia New Zealand",18.918091366628
+"East Asia","NW Europe",69.8571738288811
+"East Asia","South Asia",199.470662020906
+"East Asia","NE Europe",33.9843902439024
+"East Asia","Andes",18.8187611304685
+"East Asia","Caribbean",6.18090592334495
+"East Asia","Southern Africa",14.1722648083624
+"East Asia","Trop. S. America",6.9381610530391
+"East Asia","North America",251.335694928378
+"East Asia","East Asia",356.769337979094
+"East Asia","Central America",8.34285714285714
+"East Asia","East Africa",34.5995276809911
+"East Asia","SE Mediterranean",33.8731707317073
+"East Asia","West Africa",8.93296167247387
+"East Asia","IOI",3.97756097560976
+"East Asia","Southeast Asia",88.7778281068525
+"East Asia","Central Africa",2.84
+"East Asia","Central Asia",3.08
+"East Asia","SE Europe",76.5326829268293
+"East Asia","Trop. Pacific Region",2.16
+"East Asia","West Asia",31.5931707317073
+"East Asia","SW Europe",11.6878048780488
+"IOI","Australia New Zealand",0.348571428571429
+"IOI","Central Africa",0.24
+"IOI","NE Europe",0.48
+"IOI","Caribbean",0.32
+"IOI","Southeast Asia",10.56
+"IOI","Southern Africa",2.6
+"IOI","East Africa",3.04
+"IOI","North America",6.96
+"IOI","Trop. S. America",0.410731707317073
+"Trop. Pacific Region","Australia New Zealand",10.0563492063492
+"Trop. Pacific Region","Trop. Pacific Region",2.48746031746032
+"Trop. Pacific Region","NW Europe",11.3984126984127
+"Trop. Pacific Region","Andes",8.06285714285715
+"Trop. Pacific Region","Southeast Asia",5.94698412698413
+"Central America","SE Europe",42.0643902439024
+"Central America","NE Europe",9.1184668989547
+"West Africa","Central America",8.48947735191638
+"West Africa","Trop. Pacific Region",0.497142857142857
+"Caribbean","Central Africa",1.20390243902439
+"Caribbean","Southern Africa",8.02977158343012
+"Caribbean","NE Europe",0.377560975609756
+"Caribbean","SW Europe",1.19024390243902
+"Caribbean","IOI",0.946341463414634
+"Caribbean","Trop. Pacific Region",0.283333333333333
+"Caribbean","SE Mediterranean",0.304390243902439
+"NE Europe","Trop. S. America",7.11414634146341
+"NE Europe","Andes",10.2351219512195
+"NE Europe","SW Europe",9.63317073170731
+"NE Europe","East Asia",23.9717073170732
+"Central Africa","Central Asia",0.12
+"SE Mediterranean","Central Africa",0.16
+"SE Mediterranean","IOI",0.2
+"SE Mediterranean","West Africa",0.32
+"SE Mediterranean","Trop. Pacific Region",0.04
+"Central America","Central Asia",0.08
+"East Africa","SW Europe",175.846550522648
+"East Africa","Central Asia",2.36
+"Trop. Pacific Region","East Asia",15.5771428571429
+"Trop. Pacific Region","SE Mediterranean",0.08
+"Trop. Pacific Region","East Africa",5.93476190476191
+"Trop. Pacific Region","South Asia",7.45714285714286
+"Trop. Pacific Region","West Asia",0.56
+"Trop. Pacific Region","SE Europe",1.12
+"Trop. Pacific Region","Southern Africa",1.71428571428571
+"Trop. Pacific Region","North America",7.32
+"NW Europe","Central Asia",0.36
+"Central Asia","Andes",0.195121951219512
+"Central Asia","Caribbean",0.0731707317073171
+"NW Europe","Trop. Pacific Region",0.12
+"SE Europe","Central Africa",32.2243902439024
+"Caribbean","Central Asia",0.04
+"NE Europe","Central America",10.3824390243902
+"NE Europe","Caribbean",1.91414634146341
+"NE Europe","Trop. Pacific Region",0.16
+"NE Europe","West Africa",0.304390243902439
+"NE Europe","Southeast Asia",5.05756097560976
+"NE Europe","Southern Africa",3.54926829268293
+"NE Europe","IOI",0.177560975609756
+"South Asia","Temp. S. America",4.47860627177701
+"Southeast Asia","Temp. S. America",1.73714285714286
+"Southeast Asia","Central America",14.7342779713512
+"Southeast Asia","Caribbean",10.1138598528842
+"Southeast Asia","Southern Africa",19.0848122338366
+"Southeast Asia","Central Africa",5.95010452961672
+"Southeast Asia","SE Europe",54.2243902439024
+"Southeast Asia","IOI",1.8
+"West Asia","Central Africa",0.457560975609756
+"SW Europe","SE Mediterranean",34.08
+"SW Europe","Temp. S. America",2.5580487804878
+"SW Europe","Central Asia",1.84
+"SW Europe","Australia New Zealand",26.6975609756098
+"SW Europe","NW Europe",71.5287804878049
+"SW Europe","South Asia",50.8751219512195
+"SW Europe","NE Europe",17.5043902439024
+"SW Europe","Central America",27.5551219512196
+"SW Europe","Trop. S. America",6.53853658536586
+"SW Europe","SE Europe",28.0468292682927
+"SW Europe","North America",63.4887804878049
+"SW Europe","Andes",9.27414634146342
+"SW Europe","East Asia",18.8146341463415
+"SW Europe","West Africa",0.16
+"SW Europe","Caribbean",1.49463414634146
+"SW Europe","East Africa",39.2370731707317
+"SW Europe","Southeast Asia",1.16878048780488
+"SW Europe","West Asia",24.9941463414634
+"SW Europe","SW Europe",31.6136585365854
+"SW Europe","Southern Africa",2.33170731707317
+"SE Europe","Trop. Pacific Region",6.96
+"SE Europe","West Africa",232.4
+"SE Europe","IOI",12.3443902439024
+"Southern Africa","Australia New Zealand",4.90439024390244
+"Southern Africa","Temp. S. America",2.22341463414634
+"IOI","Temp. S. America",0.16
+"IOI","West Africa",0.4
+"IOI","Andes",1.50926829268293
+"IOI","East Asia",10.76
+"IOI","SE Mediterranean",0.04
+"IOI","West Asia",0.52
+"IOI","SW Europe",0.48
+"IOI","SE Europe",3.8
+"IOI","IOI",0.36
+"IOI","Central America",0.108571428571429
+"IOI","Trop. Pacific Region",0.08
+"IOI","Central Asia",0.36
+"Southern Africa","Central America",18.2256445993031
+"Southern Africa","Andes",35.3704529616725
+"Southern Africa","Caribbean",4.51219512195122
+"Southern Africa","Central Africa",2.77867595818815
+"Southern Africa","IOI",0.504390243902439
+"Central America","Trop. Pacific Region",0.391111111111111
+"Southern Africa","Central Asia",0.16
+"Trop. Pacific Region","Caribbean",19.8171428571429
+"West Asia","Trop. Pacific Region",0.2
+"Trop. Pacific Region","Central Africa",12.9771428571429
+"Trop. Pacific Region","Temp. S. America",0.04
+"Trop. Pacific Region","Trop. S. America",2.36
+"Trop. Pacific Region","West Africa",2.15428571428572
+"Trop. Pacific Region","Central America",4.57142857142857
+"Trop. Pacific Region","NE Europe",17.36
+"Trop. Pacific Region","SW Europe",0.04
+"Trop. Pacific Region","IOI",0.44
+"NE Europe","Central Africa",0.12
+"NE Europe","Central Asia",1.16
+"Southern Africa","Trop. Pacific Region",0.108571428571429
+"North America","Central Africa",5.21951219512196
+"North America","Central Asia",0.36
+"North America","IOI",3.61756097560976
+"North America","Trop. Pacific Region",2.6
