@@ -14,8 +14,10 @@ a[,4] <- as.numeric(a[,4])
 a[,1] <- paste(a[,1]," >",sep="")
 a[,3] <- paste("> ",a[,3],sep="")
 
+
+a %>% filter(Genebank_country=="Canada"|Genebank_country=="United States of America") -> b
 ## Step 1, get SOURCE -> Genebank relationships
-a %>%
+b %>%
   group_by(Origin,Genebank_country) %>%
   summarize(Val=sum(Average.no.samples.per.year)) -> Source2GB
 
@@ -24,7 +26,7 @@ Source2GB$color <- "blue"
 names(Source2GB)[1:2] <- c("FROM","TO") 
 
 ## Step 2, get GB -> Sink
-a %>%
+b %>%
   group_by(Genebank_country,Recipient) %>%
   summarize(Val=sum(Average.no.samples.per.year)) -> GB2Sink
 
@@ -56,8 +58,8 @@ Boff$To1 <- match(Boff$TO,nodes$label)
 Edges <- Boff %>% select(from=From1,to=To1,value=Val,group,color)
 
 ## Too many relationships, set some threshold on edges
-Edges %>% filter(value>100000) -> EdgesPlot
+Edges %>% filter(value>50000) -> EdgesPlot
 
 # Create graph
 # visNetwork(nodes, head(Edges,30)) %>% visEdges(arrows = 'to')
-visNetwork(nodes, EdgesPlot) %>% visEdges(arrows = 'to')
+visNetwork(nodes, EdgesPlot) %>% visEdges(arrows = 'to',length = 10)
