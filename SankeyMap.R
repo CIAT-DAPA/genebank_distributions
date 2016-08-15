@@ -73,18 +73,19 @@ i=1
   
   # usa_map <- map_data("usa")
   world_map <- map_data("world")
-  
-  
-  ggplot(df)  + geom_map(data=world_map, map=world_map,
+
+  # df <- df[1,]
+  ggplot(df)  + borders("world") + coord_equal() +
+    geom_map(data=world_map, map=world_map,
                 aes(x=long, y=lat, map_id=region),
                 fill="#000000", color="#000000", size=0.15) +
-    # geom_polygon(data = usa_map, aes(long, lat)) +
-    geom_curve(data = df, alpha = .1,
+    geom_curve(data = df, alpha = .2,
                  aes(x = fromLon, y = fromLat,
                      xend = toLon, yend = toLat,
-                     size=Val, colour=To))
+                     size=Val, colour=To),arrow = arrow(angle = 10,length = unit(0.13, "npc")))
+  
 
-# ggplotly()  
+# ggplotly()
   
   
   
