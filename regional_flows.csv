@@ -1,0 +1,85 @@
+"source","target","value"
+"Africa","Australia",144088
+"Asia","Australia",363524
+"Europe","Australia",196361
+"Latin America and the Caribbean","Australia",121682
+"North America","Australia",57559
+"Oceania","Australia",110677
+"Australia","Africa",45303
+"Australia","Asia",299815
+"Australia","Europe",156830
+"Australia","Latin America and the Caribbean",68485
+"Australia","North America",99831
+"Australia","Oceania",323627
+"Africa","Canada",92587
+"Asia","Canada",180025
+"Europe","Canada",218774
+"Latin America and the Caribbean","Canada",33066
+"North America","Canada",132293
+"Oceania","Canada",13993
+"Canada","Africa",28522
+"Canada","Asia",160377
+"Canada","Europe",237693
+"Canada","Latin America and the Caribbean",22947
+"Canada","North America",213229
+"Canada","Oceania",7970
+"Africa","CGIAR",1805484
+"Asia","CGIAR",2536364
+"Europe","CGIAR",1076342
+"Latin America and the Caribbean","CGIAR",1746152
+"North America","CGIAR",237734
+"Oceania","CGIAR",131456
+"CGIAR","Africa",1764948
+"CGIAR","Asia",2268835
+"CGIAR","Europe",1578255
+"CGIAR","Latin America and the Caribbean",1244000
+"CGIAR","North America",429789
+"CGIAR","Oceania",247705
+"Africa","Germany",298661
+"Asia","Germany",1016326
+"Europe","Germany",1613293
+"Latin America and the Caribbean","Germany",326630
+"North America","Germany",144908
+"Oceania","Germany",36025
+"Germany","Africa",134047
+"Germany","Asia",861141
+"Germany","Europe",2090017
+"Germany","Latin America and the Caribbean",45595
+"Germany","North America",235745
+"Germany","Oceania",69298
+"Africa","Netherlands",166044
+"Asia","Netherlands",474196
+"Europe","Netherlands",704117
+"Latin America and the Caribbean","Netherlands",316866
+"North America","Netherlands",93802
+"Oceania","Netherlands",28910
+"Netherlands","Africa",93369
+"Netherlands","Asia",421790
+"Netherlands","Europe",1006131
+"Netherlands","Latin America and the Caribbean",33634
+"Netherlands","North America",159800
+"Netherlands","Oceania",69211
+"Africa","United Kingdom",26406
+"Asia","United Kingdom",42418
+"Europe","United Kingdom",155088
+"Latin America and the Caribbean","United Kingdom",4519
+"North America","United Kingdom",46370
+"Oceania","United Kingdom",8915
+"United Kingdom","Africa",20304
+"United Kingdom","Asia",40927
+"United Kingdom","Europe",186278
+"United Kingdom","Latin America and the Caribbean",13170
+"United Kingdom","North America",13111
+"United Kingdom","Oceania",9926
+"Africa","United States of America",1781780
+"Asia","United States of America",3077203
+"Europe","United States of America",2560989
+"Latin America and the Caribbean","United States of America",1684837
+"North America","United States of America",439569
+"Oceania","United States of America",279174
+"United States of America","Africa",942281
+"United States of America","Asia",3155065
+"United States of America","Europe",3206676
+"United States of America","Latin America and the Caribbean",1322323
+"United States of America","North America",850963
+"United States of America","Oceania",346244
