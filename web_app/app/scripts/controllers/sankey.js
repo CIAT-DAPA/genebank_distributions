@@ -10,13 +10,14 @@
 angular.module('genebanksDistributionApp')
   .controller('SankeyCtrl', function (GenebankFactory) {
     GenebankFactory.list().then(function (data) {
-      console.log(data);
       var colors = {
-        'environment': '#edbd00',
-        'social': '#367d85',
-        'animals': '#97ba4c',
-        'health': '#f5662b',
-        'research_ingredient': '#3f3e47',
+        'australia': '#FF0000',
+        'canada': '#EE4000',
+        'cgiar': '#8B0000',
+        'germany': '#458B00',
+        'netherlands': '#EED5B7',
+        'unitedkingdom': '#8B4513',
+        'unitedstatesofamerica': '#1E90FF',
         'fallback': '#9f9fa3'
       };
 
@@ -36,7 +37,7 @@ angular.module('genebanksDistributionApp')
       function label(node) {
         return node.name.replace(/\s*\(.*?\)$/, '');
       }
-      function color(node, depth) {
+      function color(node, depth) {        
         var id = node.id.replace(/(_score)?(_\d+)?$/, '');
         if (colors[id]) {
           return colors[id];
