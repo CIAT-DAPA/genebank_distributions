@@ -155,12 +155,12 @@ toJSON(json_subgroup, pretty=FALSE)
 sink()
 
 #### =============================================================== ###
-#### create sankey to country level per region
+#### create sub-sankey to country level per region
 #### =============================================================== ####
 
 regions <- as.character(nodes$name[grep(pattern = '_out$', x = nodes$id, fixed = F)]) %>% sort
 
-# regions <- countryRegions$Origin_region %>% as.character %>% unique %>% sort
+# calcs by region
 countryRegions <- lapply(regions, function(z){
   
   nodes_id <- nodes$id[grep(pattern = z, x = nodes$name, fixed = F)]
@@ -247,85 +247,97 @@ sink('sankey_draft_subSankey_corrected.json') # redirect console output to a fil
 toJSON(cJson, pretty=FALSE)
 sink()
 
+#### =============================================================== ###
+#### create sub-sankey to country level per region in-out schema
+#### =============================================================== ####
 
+regions2 <- as.character(nodes$name[grep(pattern = '_in$', x = nodes$id, fixed = F)]) %>% sort
 
-
-
-
-a %>% select(Origin, Recipient_region, Genebank_country, Average.no.samples.per.year) -> country
-country %>% group_by(Origin, Recipient_region, Genebank_country) %>% summarise(sum(Average.no.samples.per.year, na.rm=TRUE)) -> country2; rm(country)
-names(country2)[4] <- 'Samples'
-country2$Origin <- as.character(country2$Origin)
-country2$Recipient_region <- as.character(country2$Recipient_region)
-country2$Genebank_country <- as.character(country2$Genebank_country)
-country2$Samples <- as.numeric(country2$Samples)
-
-# calculate flows from country per genebank
-
-cFlows <- lapply(1:length(GeneBanks), function(i){
+# calcs by region
+countryRegions2 <- lapply(regions2, function(z){
   
-  country2 %>% filter(Genebank_country == GeneBanks[i]) -> b
+  nodes_id <- nodes$id[grep(pattern = z, x = nodes$name, fixed = F)]
   
-  ## Step 1, get SOURCE -> Genebank relationships
-  b %>%
-    group_by(Origin, Genebank_country) %>%
-    summarize(Val=sum(Samples)) -> Source2GB
+  a %>% filter(Recipient_region==gsub(pattern = '> ', replacement = '', x = z, fixed = TRUE)) %>% select(Origin_region, Recipient, Genebank_country, Average.no.samples.per.year) -> country
+  country %>% group_by(Origin_region, Recipient, Genebank_country) %>% summarise(sum(Average.no.samples.per.year, na.rm=TRUE)) -> country2; rm(country)
+  names(country2)[4] <- 'Samples'
+  country2$Origin_region <- as.character(country2$Origin_region)
+  country2$Recipient <- as.character(country2$Recipient)
+  country2$Genebank_country <- as.character(country2$Genebank_country)
+  country2$Samples <- as.numeric(country2$Samples)
   
-  names(Source2GB) <- c('source', 'target', 'value')
+  # calculate flows from country per genebank
   
-  ## Step 2, get Genebank -> Sink
-  b %>%
-    group_by(Genebank_country, Recipient_region) %>%
-    summarize(Val=sum(Samples)) -> GB2Sink
+  cFlows <- lapply(1:length(GeneBanks), function(i){
+    
+    country2 %>% filter(Genebank_country == GeneBanks[i]) -> b
+    
+    ## Step 1, get SOURCE -> Genebank relationships
+    b %>%
+      group_by(Origin_region, Genebank_country) %>%
+      summarize(Val=sum(Samples)) -> Source2GB
+    
+    names(Source2GB) <- c('source', 'target', 'value')
+    
+    ## Step 2, get Genebank -> Sink
+    b %>%
+      group_by(Genebank_country, Recipient) %>%
+      summarize(Val=sum(Samples)) -> GB2Sink
+    
+    names(GB2Sink) <- c('source', 'target', 'value')
+    
+    ## Combine datasets
+    Boff <- bind_rows(as.data.frame(Source2GB), as.data.frame(GB2Sink))
+    return(Boff)
+    
+  }); rm(country2)
+  cFlows <- do.call(rbind, cFlows)
   
-  names(GB2Sink) <- c('source', 'target', 'value')
+  cFlows$source[!(cFlows$source %in% GeneBanks)] <- paste(cFlows$source[!(cFlows$source %in% GeneBanks)], ' >', sep = '')
+  cFlows$target[!(cFlows$target %in% GeneBanks)] <- paste('> ', cFlows$target[!(cFlows$target %in% GeneBanks)], sep = '')
   
-  ## Combine datasets
-  Boff <- bind_rows(as.data.frame(Source2GB), as.data.frame(GB2Sink))
-  return(Boff)
+  cNodes <- c(cFlows$source, cFlows$target) %>% unique %>% sort
+  lcNodes <- length(cNodes)
+  cNodes <- data.frame(node=0:(lcNodes-1), name=cNodes); rm(lcNodes)
+  cNodes$id <- ifelse(test = cNodes$name %in% GeneBanks, yes = 1, no = NA)
+  cNodes$id[which(cNodes$id==1)] <- gsub(pattern = ' ', replacement = '', x = cNodes$name[which(cNodes$id==1)])
   
-}); rm(country2)
-cFlows <- do.call(rbind, cFlows)
-# write.csv(cFlows, 'regional_flows.csv', row.names = F)
-
-cFlows$source[!(cFlows$source %in% GeneBanks)] <- paste(cFlows$source[!(cFlows$source %in% GeneBanks)], ' >', sep = '')
-cFlows$target[!(cFlows$target %in% GeneBanks)] <- paste('> ', cFlows$target[!(cFlows$target %in% GeneBanks)], sep = '')
-
-cNodes <- c(cFlows$source, cFlows$target) %>% unique %>% sort
-lcNodes <- length(cNodes)
-cNodes <- data.frame(node=0:(lcNodes-1), name=cNodes); rm(lcNodes)
-GeneBanks
-cNodes$id <- ifelse(test = cNodes$name %in% GeneBanks, yes = 1, no = NA)
-cNodes$id[which(cNodes$id==1)] <- gsub(pattern = ' ', replacement = '', x = cNodes$name[which(cNodes$id==1)])
-
-cNodes$id[is.na(cNodes$id)] <- gsub(pattern = ' ', replacement = '', x = cNodes$name[is.na(cNodes$id)])
-cNodes$id[grep(pattern = '^>[a-zA-Z]', x = cNodes$id, fixed = F)] <- paste(gsub(pattern = '>', replacement = '', x = cNodes$id[grep(pattern = '^>[a-zA-Z]', x = cNodes$id, fixed = F)]), '_in', sep = '')
-cNodes$id[grep(pattern = '*>$', x = cNodes$id, fixed = F)] <- paste(gsub(pattern = '>', replacement = '', x = cNodes$id[grep(pattern = '*>$', x = cNodes$id, fixed = F)]), '_out', sep = '')
-
-cFlows_coded <- cFlows#; rm(cFlows)
-
-for(i in 1:nrow(cNodes)) {
+  cNodes$id[is.na(cNodes$id)] <- gsub(pattern = ' ', replacement = '', x = cNodes$name[is.na(cNodes$id)])
+  cNodes$id[grep(pattern = '^>[a-zA-Z]', x = cNodes$id, fixed = F)] <- paste(gsub(pattern = '>', replacement = '', x = cNodes$id[grep(pattern = '^>[a-zA-Z]', x = cNodes$id, fixed = F)]), '_in', sep = '')
+  cNodes$id[grep(pattern = '*>$', x = cNodes$id, fixed = F)] <- paste(gsub(pattern = '>', replacement = '', x = cNodes$id[grep(pattern = '*>$', x = cNodes$id, fixed = F)]), '_out', sep = '')
   
-  cFlows_coded$source <- gsub(pattern = paste('^', as.character(cNodes$name[i]), sep = ''), replacement = cNodes$node[i], x = cFlows_coded$source, fixed = FALSE)
-  cFlows_coded$target <- gsub(pattern = paste('^', as.character(cNodes$name[i]), sep = ''), replacement = cNodes$node[i], x = cFlows_coded$target, fixed = FALSE)
+  cFlows_coded <- cFlows#; rm(cFlows)
   
-}
+  for(i in 1:nrow(cNodes)) {
+    
+    cFlows_coded$source <- gsub(pattern = paste('^', as.character(cNodes$name[i]), sep = ''), replacement = cNodes$node[i], x = cFlows_coded$source, fixed = FALSE)
+    cFlows_coded$target <- gsub(pattern = paste('^', as.character(cNodes$name[i]), sep = ''), replacement = cNodes$node[i], x = cFlows_coded$target, fixed = FALSE)
+    
+  }
+  
+  cFlows_coded$source <- as.numeric(cFlows_coded$source)
+  cFlows_coded$target <- as.numeric(cFlows_coded$target)
+  
+  # Falkland Islands (Malvinas) case
+  # cFlows_coded[!complete.cases(cFlows_coded),'source'] <- cNodes$node[grep(pattern = 'Falkland Islands (Malvinas)', x = cNodes$name, fixed = TRUE)]
+  
+  subsankey <- list(id = tolower(nodes_id),
+                    sankey = list(nodes = data.frame(name=cNodes$name, id=tolower(cNodes$id)),
+                                  links = cFlows_coded)
+  )
+  
+  return(subsankey)
+  
+})
 
-cFlows_coded$source <- as.numeric(cFlows_coded$source)
-cFlows_coded$target <- as.numeric(cFlows_coded$target)
-
-# Falkland Islands (Malvinas) case
-cFlows_coded[!complete.cases(cFlows_coded),'source'] <- cNodes$node[grep(pattern = 'Falkland Islands (Malvinas)', x = cNodes$name, fixed = TRUE)]
-
-cSankeyList <- list(nodes = data.frame(name = cNodes$name, id = tolower(cNodes$id)),
-                    links = cFlows_coded)
+all <- c(countryRegions, countryRegions2)
 
 # save JSON file
 library(jsonlite)
 cJson <- list(nodes = data.frame(name = nodes$name, id = tolower(nodes$id)),
               links = flows_coded,
-              subSankey = cSankeyList)
+              subSankey = all)
 
-sink('sankey_draft_subSankey.json') # redirect console output to a file
+sink('sankey_draft_subSankey_corrected2.json') # redirect console output to a file
 toJSON(cJson, pretty=FALSE)
 sink()
