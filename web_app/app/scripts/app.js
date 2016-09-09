@@ -15,7 +15,8 @@ angular
     'ngRoute'
   ])
   .value('config',{
-      data_genebanks: 'data/genebanks.json'
+      data_genebanks: 'data/genebanks.json',
+      sankey_depth:1
   })
   .config(function ($routeProvider) {
     $routeProvider

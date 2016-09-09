@@ -8,7 +8,7 @@
  * Controller of the genebanksDistributionApp
  */
 angular.module('genebanksDistributionApp')
-  .controller('SankeyCtrl', function (GenebankFactory) {
+  .controller('SankeyCtrl', function (GenebankFactory, config) {
     GenebankFactory.list().then(function (data) {
       var colors = {
         'australia': '#FF0000',
@@ -33,11 +33,45 @@ angular.module('genebanksDistributionApp')
         .nodePadding(10)
         .spread(true)
         .iterations(0)
+        .on('node:click', nodeClick)
         .draw(data);
+
+      function nodeClick(node) {
+        var newSankey = [];
+        if (config.sankey_depth == 1) {
+          newSankey = data.subSankey.filter(function (item) {
+            return item.id[0] === node.id;
+          });
+          newSankey=newSankey[0].sankey;
+          config.sankey_depth = 2;
+        }
+        else {
+          newSankey = data;
+          config.sankey_depth = 1;
+        }
+        $("#chart_sankey").html('');
+        var chartClick = d3.select("#chart_sankey").append("svg").chart("Sankey.Path");
+        chartClick.name(label)
+          .colorNodes(function (name, node) {
+            return color(node, 1) || colors.fallback;
+          })
+          .colorLinks(function (link) {
+            return color(link.source, 4) || color(link.target, 1) || colors.fallback;
+          })
+          .nodeWidth(15)
+          .nodePadding(10)
+          .spread(true)
+          .iterations(0)
+          .on('node:click', nodeClick)
+
+          .draw(newSankey);
+
+      }
+
       function label(node) {
         return node.name.replace(/\s*\(.*?\)$/, '');
       }
-      function color(node, depth) {        
+      function color(node, depth) {
         var id = node.id.replace(/(_score)?(_\d+)?$/, '');
         if (colors[id]) {
           return colors[id];
