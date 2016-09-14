@@ -310,8 +310,8 @@ countryRegions2 <- lapply(regions2, function(z){
   
   for(i in 1:nrow(cNodes)) {
     
-    cFlows_coded$source <- gsub(pattern = paste('^', as.character(cNodes$name[i]), sep = ''), replacement = cNodes$node[i], x = cFlows_coded$source, fixed = FALSE)
-    cFlows_coded$target <- gsub(pattern = paste('^', as.character(cNodes$name[i]), sep = ''), replacement = cNodes$node[i], x = cFlows_coded$target, fixed = FALSE)
+    cFlows_coded$source <- gsub(pattern = paste('^', as.character(cNodes$name[i]), '$', sep = ''), replacement = cNodes$node[i], x = cFlows_coded$source, fixed = FALSE)
+    cFlows_coded$target <- gsub(pattern = paste('^', as.character(cNodes$name[i]), '$', sep = ''), replacement = cNodes$node[i], x = cFlows_coded$target, fixed = FALSE)
     
   }
   

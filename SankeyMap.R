@@ -3,7 +3,7 @@ library(dplyr)
 library(xlsx)
 
 ## Remove scientific notation
-options(scipen=999)
+options(scipen = 999); options(warn = -1)
 
 ## Read data in
 a <- read.xlsx2("ALL_Origincountry-Tocountry_circosfinal_2016_7_7_avannualwgenebank_share.xlsx",1)
