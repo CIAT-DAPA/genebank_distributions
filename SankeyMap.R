@@ -36,12 +36,14 @@ names(GB2Sink)[1:2] <- c("From","To")
 BofoDem <- list(Source2GB=Source2GB,GB2Sink=GB2Sink)
 
 i=1
-# for(i in 1:length(BofoDem)){  
+
+plotlyTest <- lapply(1:length(BofoDem), function(i){
+  
   b <- BofoDem[[i]]
-  ## harvest nodes
+  
+  ## Harvest nodes
   nodes <- data.frame(name=b[,1:2] %>% unlist %>% as.character() %>% unique())
-
-
+  
   ## Ok, now add coordinates by geocoding. 
   ## Step 1: Run the following:
   # paste(unlist(a[,1:3]) %>% unique(),collapse="\r") %>% write.table("clipboard")
@@ -71,105 +73,126 @@ i=1
   library(nycflights13)
   library(dplyr)
   
-  # usa_map <- map_data("usa")
-  world_map <- map_data("world")
-  
-  
-  ggplot(df)  + geom_map(data=world_map, map=world_map,
-                aes(x=long, y=lat, map_id=region),
-                fill="#000000", color="#000000", size=0.15) +
-    # geom_polygon(data = usa_map, aes(long, lat)) +
-    geom_curve(data = df, alpha = .1,
-                 aes(x = fromLon, y = fromLat,
-                     xend = toLon, yend = toLat,
-                     size=Val, colour=To))
-  
-  ggplot(df)  + borders("world") + coord_equal() +
-    geom_map(data=world_map, map=world_map,
-             aes(x=long, y=lat, map_id=region),
-             fill="#000000", color="#000000", size=0.15) +
-    geom_curve(data = df, alpha = .2,
-               aes(x = fromLon, y = fromLat,
-                   xend = toLon, yend = toLat,
-                   size=Val, colour=To),arrow = arrow(angle = 10,length = unit(0.13, "npc")))
-  
-  ### ggplotly test
-  
   viz <- ggplot(df) + borders("world", fill='black', colour = "black") + coord_equal()
   viz <- viz + geom_segment(data = df, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(0.13, "npc"))) + theme_bw()
   viz <- viz + guides(colour = FALSE) + guides(size = FALSE)
-  ggplotly(viz)
   
-  viz2 <- ggplot(df2) + borders("world", fill='black', colour = "black") + coord_equal()
-  viz2 <- viz2 + geom_segment(data = df2, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(0.13, "npc"))) + theme_bw()
-  viz2 <- viz2 + guides(colour = FALSE) + guides(size = FALSE)
-  ggplotly(viz2)
+  return(viz)
   
-  p <- subplot(
-    ggplotly(viz),
-    ggplotly(viz2),
-    margin = 0.01
-  ) %>% layout(showlegend = FALSE)
-  p
-  
-  ############## Approach one and a half, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ###################
-  library(geosphere)
+})
 
-  flows <- gcIntermediate(df[,5:4], df[,7:6],n=20,sp = TRUE, addStartEnd = T,breakAtDateLine=T)
-  flows$counts <- df$Val/max(df$Val)*10
-  flows$origins <- df$From
-  flows$destinations <- df$To
+plotlyTest[[2]]
 
-  library(leaflet)
-  library(RColorBrewer)
+##################### Approach one, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ##################### 
+library(plotly)
+library(nycflights13)
+library(dplyr)
 
-  hover <- paste0(flows$origins, " to ",
-                  flows$destinations, ': ',
-                  as.character(round(flows$counts*max(df$Val)/10),1))
+# usa_map <- map_data("usa")
+world_map <- map_data("world")
 
-  pal <- colorFactor(brewer.pal(4, 'Set2'), flows$origins)
-  
-  leaflet() %>%
-    # addProviderTiles('CartoDB.Positron') %>%
-    # addProviderTiles('Thunderforest.TransportDark') %>%
-    addProviderTiles('Stamen.TonerBackground') %>%
-    # addProviderTiles('CartoDB.DarkMatterNoLabels') %>%
-    # addProviderTiles('NASAGIBS.ViirsEarthAtNight2012') %>%
-    addPolylines(data = flows, weight = ~counts,
-                 group = ~origins, color = ~pal(origins),popup = ~hover) %>%
-    addLayersControl(overlayGroups = unique(flows$origins),
-                     options = layersControlOptions(collapsed = T))
-  
-  
-  library(threejs) # devtools::install_github("bwlewis/rthreejs")
-  library(RColorBrewer)
-  
-  names(b) <- c("origins", "destinations", "counts", "latitude.x","longitude.x", "latitude.y",  "longitude.y")
-  
-  colReference <- data.frame(GB =GeneBanks,
-                             col=brewer.pal(length(GeneBanks), 'Dark2'))
-  if (i==1) b$colors <- colReference$col[match(x = b$destinations,table = colReference$GB)]
-  if (i==2) b$colors <- colReference$col[match(x = b$origins,table = colReference$GB)]
-  b$colors <- as.character(b$colors)
-  
-  ## Need to normalize the weights (not that it works anyway... but it works in RStudio :))
-  weights <- b$counts/10000
-  weights[weights>10] <- 10
-  
-  ## For Origin -> Gene Bank, show bars to show how MUCH each country is giving. 
-  ##   And for Gene Bank -> Destination, show bars to show how much each country is GETTING
-  ## (probably we can hide this eventually... but useful now to find bugs)
-  if (i==1) { ##Source2GB
-    b$lat.pt <- b$latitude.x
-    b$lon.pt <- b$longitude.x
-  } else{
-    b$lat.pt <- b$latitude.y
-    b$lon.pt <- b$longitude.y
-  }
-  
-  m <- globejs(arcsLwd = weights, arcsHeight = .5,arcs = b[,4:7],
-          arcsOpacity=.3,arcsColor = b$colors
-          ,lat=b$lat.pt,lon=b$lon.pt,value=weights*10, color = "grey")
-  # )
-  visNetwork::visSave(m,paste("globe-",names(BofoDem)[i],".html",sep=""))
+
+ggplot(df)  + geom_map(data=world_map, map=world_map,
+                       aes(x=long, y=lat, map_id=region),
+                       fill="#000000", color="#000000", size=0.15) +
+  # geom_polygon(data = usa_map, aes(long, lat)) +
+  geom_curve(data = df, alpha = .1,
+             aes(x = fromLon, y = fromLat,
+                 xend = toLon, yend = toLat,
+                 size=Val, colour=To))
+
+ggplot(df)  + borders("world") + coord_equal() +
+  geom_map(data=world_map, map=world_map,
+           aes(x=long, y=lat, map_id=region),
+           fill="#000000", color="#000000", size=0.15) +
+  geom_curve(data = df, alpha = .2,
+             aes(x = fromLon, y = fromLat,
+                 xend = toLon, yend = toLat,
+                 size=Val, colour=To),arrow = arrow(angle = 10,length = unit(0.13, "npc")))
+#############################################################################################################################
+
+map1 <- ggplotly(plotlyTest[[1]])
+map2 <- ggplotly(plotlyTest[[2]])
+
+p %>% plotly::layout(add_data(map1),
+                     add_data(map2),
+                     title = "Drop down menus - Styling",
+                     xaxis = list(title = "Longitude"),
+                     yaxis = list(title = "Latitude"),
+                     updatemenus = list(
+                       list(
+                         y = 40,
+                         buttons = list(
+                           
+                           list(method = "restyle",
+                                args = list("type", "map1"),
+                                label = "Countries to GeneBanks"),
+                           
+                           list(method = "restyle",
+                                args = list("type", "map2"),
+                                label = "GeneBanks to countries")))
+                     ))
+
+
+############## Approach one and a half, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ###################
+library(geosphere)
+
+flows <- gcIntermediate(df[,5:4], df[,7:6],n=20,sp = TRUE, addStartEnd = T,breakAtDateLine=T)
+flows$counts <- df$Val/max(df$Val)*10
+flows$origins <- df$From
+flows$destinations <- df$To
+
+library(leaflet)
+library(RColorBrewer)
+
+hover <- paste0(flows$origins, " to ",
+                flows$destinations, ': ',
+                as.character(round(flows$counts*max(df$Val)/10),1))
+
+pal <- colorFactor(brewer.pal(4, 'Set2'), flows$origins)
+
+leaflet() %>%
+  # addProviderTiles('CartoDB.Positron') %>%
+  # addProviderTiles('Thunderforest.TransportDark') %>%
+  addProviderTiles('Stamen.TonerBackground') %>%
+  # addProviderTiles('CartoDB.DarkMatterNoLabels') %>%
+  # addProviderTiles('NASAGIBS.ViirsEarthAtNight2012') %>%
+  addPolylines(data = flows, weight = ~counts,
+               group = ~origins, color = ~pal(origins),popup = ~hover) %>%
+  addLayersControl(overlayGroups = unique(flows$origins),
+                   options = layersControlOptions(collapsed = T))
+
+
+library(threejs) # devtools::install_github("bwlewis/rthreejs")
+library(RColorBrewer)
+
+names(b) <- c("origins", "destinations", "counts", "latitude.x","longitude.x", "latitude.y",  "longitude.y")
+
+colReference <- data.frame(GB =GeneBanks,
+                           col=brewer.pal(length(GeneBanks), 'Dark2'))
+if (i==1) b$colors <- colReference$col[match(x = b$destinations,table = colReference$GB)]
+if (i==2) b$colors <- colReference$col[match(x = b$origins,table = colReference$GB)]
+b$colors <- as.character(b$colors)
+
+## Need to normalize the weights (not that it works anyway... but it works in RStudio :))
+weights <- b$counts/10000
+weights[weights>10] <- 10
+
+## For Origin -> Gene Bank, show bars to show how MUCH each country is giving. 
+##   And for Gene Bank -> Destination, show bars to show how much each country is GETTING
+## (probably we can hide this eventually... but useful now to find bugs)
+if (i==1) { ##Source2GB
+  b$lat.pt <- b$latitude.x
+  b$lon.pt <- b$longitude.x
+} else{
+  b$lat.pt <- b$latitude.y
+  b$lon.pt <- b$longitude.y
+}
+
+m <- globejs(arcsLwd = weights, arcsHeight = .5,arcs = b[,4:7],
+             arcsOpacity=.3,arcsColor = b$colors
+             ,lat=b$lat.pt,lon=b$lon.pt,value=weights*10, color = "grey")
+# )
+visNetwork::visSave(m,paste("globe-",names(BofoDem)[i],".html",sep=""))
 # }
+
