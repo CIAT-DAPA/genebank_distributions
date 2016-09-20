@@ -12,11 +12,13 @@ angular
   .module('genebanksDistributionApp', [
     'ngAnimate',
     'ngCookies',
-    'ngRoute'
+    'ngRoute',
+    'uiGmapgoogle-maps'
   ])
   .value('config',{
       data_genebanks: 'data/genebanks.json',
-      sankey_depth:1
+      sankey_depth:1,
+      genebanks_map: 'data/map_genebanks.json'
   })
   .config(function ($routeProvider) {
     $routeProvider
@@ -34,6 +36,11 @@ angular
         templateUrl: 'views/sankey.html',
         controller: 'SankeyCtrl',
         controllerAs: 'csankey'
+      })
+      .when('/map', {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl',
+        controllerAs: 'cmap'
       })
       .otherwise({
         redirectTo: '/'

@@ -117,3 +117,7 @@ body {
   stroke: #000;
   stroke-opacity: .2;
 }
+
+/*** Map ***/
+
+.angular-google-map-container { height: 600px; }

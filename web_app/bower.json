@@ -7,7 +7,8 @@
     "angular-animate": "^1.4.0",
     "angular-cookies": "^1.4.0",
     "angular-route": "^1.4.0",
-    "d3.chart": "^0.3.0"
+    "d3.chart": "^0.3.0",
+    "angular-google-maps": "^2.3.4"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

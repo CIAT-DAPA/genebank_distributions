@@ -12,7 +12,6 @@ angular.module('genebanksDistributionApp')
     var dataFactory = {};
     dataFactory.list = function () {
       var items = $http.get(config.data_genebanks).then(function (response) {
-      //var items = $http.get("//cdn.rawgit.com/q-m/d3.chart.sankey/master/example/data/product.json").then(function (response) {
         return response.data;
       });
       return items;
