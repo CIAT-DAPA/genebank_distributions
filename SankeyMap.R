@@ -80,8 +80,139 @@ plotlyTest <- lapply(1:length(BofoDem), function(i){
   return(viz)
   
 })
-
 plotlyTest[[2]]
+
+#############################################################################################################################
+# GEO-JSON maker
+#############################################################################################################################
+
+flows <- lapply(1:length(BofoDem), function(i){
+  
+  b <- BofoDem[[i]]
+  
+  ## Harvest nodes
+  nodes <- data.frame(name=b[,1:2] %>% unlist %>% as.character() %>% unique())
+  
+  ## Ok, now add coordinates by geocoding. 
+  ## Step 1: Run the following:
+  # paste(unlist(a[,1:3]) %>% unique(),collapse="\r") %>% write.table("clipboard")
+  ## Step 2: Paste results in input box for http://www.findlatitudeandlongitude.com/batch-geocode/, 
+  ## get back results and save them in coords.csv
+  coords <- read.csv("coords.csv")
+  
+  bof <- coords[coords$original.address %in% nodes$name,]
+  names(bof)[1] <- "name"
+  
+  ## OK, now build the df to plot
+  b$fromLat <- bof$latitude[match(b$From,bof$name)]
+  b$fromLon <- bof$longitude[match(b$From,bof$name)]
+  b$toLat <- bof$latitude[match(b$To,bof$name)]
+  b$toLon <- bof$longitude[match(b$To,bof$name)]
+  
+  ##### OK, Start thinking about plotting! Use this awesome guide: http://personal.tcu.edu/kylewalker/interactive-flow-visualization-in-r.html
+  ## But first, I have to remove flows to self, since these show up as a line across map:
+  df <- b[b$From != b$To,]
+  df <- df %>% filter(!is.na(toLon)&!is.na(fromLon))
+  
+  ## Map regions to FROM (or TO nodes)
+  regions <- read.csv("regions.csv",stringsAsFactors = F)
+  df$regions <- regions$Region[match(df$From,regions$Country)]
+  
+  ## Continent coordinates
+  regionsVal <- as.data.frame(df %>% group_by(regions) %>% summarise(sum(Val)))
+  regionsVal <- regionsVal[complete.cases(regionsVal),]; rownames(regionsVal) <- 1:nrow(regionsVal); colnames(regionsVal)[2] <- 'sum'
+  regionsVal$sum <- regionsVal$sum/1000000
+  aux <- read.csv('./continents/coordinates_continents_fixed.csv')
+  regionsVal <- inner_join(regionsVal, aux, by=c('regions'='Continet')); rm(aux)
+  
+  ## GeneBank coordinates
+  if(i==1){
+    genebankVal <- as.data.frame(df[complete.cases(df),] %>% group_by(To) %>% summarise(sum(Val)))
+    colnames(genebankVal) <- c('genebank', 'sum')
+    genebankVal$sum <- genebankVal$sum/1000000
+    aux <- unique(df[,c("To", "toLat", "toLon")])
+    genebankVal <- inner_join(genebankVal, aux, by=c('genebank'='To')); rm(aux)
+  } else {
+    if(i==2){
+      genebankVal <- as.data.frame(df[complete.cases(df),] %>% group_by(From) %>% summarise(sum(Val)))
+      colnames(genebankVal) <- c('genebank', 'sum')
+      genebankVal$sum <- genebankVal$sum/1000000
+      aux <- unique(df[,c("From", "toLat", "toLon")])
+      genebankVal <- inner_join(genebankVal, aux, by=c('genebank'='From')); rm(aux)
+    }
+  }
+  
+  ## GeoJSON file maker
+  sink(paste("./map_genebank_test_v", i, ".json",sep=""))
+  
+  cat('{')
+  cat('"type": "FeatureCollection",')
+  cat('"features": [')
+  for(j in 1:nrow(df)){
+    
+    # [lon, lat]
+    cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df$fromLon[j], ', ', df$fromLat[j], ' ], [ ', df$toLon[j], ', ', df$toLat[j], '] ] } },')
+    
+    if(j == nrow(df)){
+      
+      # [lon, lat]
+      cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df$fromLon[j], ', ', df$fromLat[j], ' ], [ ', df$toLon[j], ', ', df$toLat[j], '] ] } }')
+      
+    }
+    
+  }
+  cat(']')
+  cat('}')
+  
+  sink()
+  
+  return(cat('Done!\n'))
+  
+})
+
+cat('{')
+cat('"RegionsDensity": {')
+cat('"type": "FeatureCollection",')
+cat('"features": [')
+for(j in 1:nrow(regionsVal)){
+  # [lon, lat]
+  cat('{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [ ', regionsVal$Lon[j], ', ', regionsVal$Lat[j], '] }, "properties": { "radio": ', regionsVal$sum[j], ' } },')
+  if(j == nrow(df)){
+    # [lon, lat]
+    cat('{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [ ', regionsVal$Lon[j], ', ', regionsVal$Lat[j], ' ] }, "properties": { "radio": ', regionsVal$sum[j], ' } }')
+  }
+}; rm(j)
+cat(']')
+cat('},')
+cat('"GenebankDensity": {')
+cat('"type": "FeatureCollection",')
+cat('"features": [')
+genebankVal
+for(j in 1:nrow(regionsVal)){
+  # [lon, lat]
+  cat('{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [ ', genebankVal$toLon[j], ', ', genebankVal$toLat[j], '] }, "properties": { "radio": ', genebankVal$sum[j], ' } },')
+  if(j == nrow(df)){
+    # [lon, lat]
+    cat('{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [ ', genebankVal$toLon[j], ', ', genebankVal$toLat[j], ' ] }, "properties": { "radio": ', genebankVal$sum[j], ' } }')
+  }
+}; rm(j)
+cat(']')
+cat('},')
+cat('"RegionsCoords":{')
+cat('"type": "FeatureCollection",')
+cat('"features": [')
+for(j in 1:nrow(df)){
+  # [lon, lat]
+  cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df$fromLon[j], ', ', df$fromLat[j], ' ], [ ', df$toLon[j], ', ', df$toLat[j], '] ] } },')
+  if(j == nrow(df)){
+    # [lon, lat]
+    cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df$fromLon[j], ', ', df$fromLat[j], ' ], [ ', df$toLon[j], ', ', df$toLat[j], '] ] } }')
+  }
+}; rm(j)
+cat(']')
+cat('}')
+cat('}')
+
 
 ##################### Approach one, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ##################### 
 library(plotly)
