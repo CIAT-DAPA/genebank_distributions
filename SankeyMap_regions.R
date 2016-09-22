@@ -31,7 +31,7 @@ a %>%
   summarize(Val=sum(Average.no.samples.per.year)) -> GB2Sink
 
 names(GB2Sink)[1:2] <- c("From","To") 
-  
+
 ######### OK, do it ##########
 BofoDem <- list(Source2GB=Source2GB,GB2Sink=GB2Sink)
 
@@ -157,8 +157,28 @@ flows <- lapply(1:length(BofoDem), function(i){
     }
   }
   
+  df_regions <- df %>% select(regions, To, fromLon, fromLat, toLon, toLat)
+  colnames(df_regions)[1] <- 'From'
+  df_regions <- df_regions[complete.cases(df_regions),]; df_regions[, c("fromLat", "fromLon")] <- NA
+  df_regions <- unique(df_regions)
+  
+  df_regions$fromLon[grep(pattern = 'Asia', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lon[3]
+  df_regions$fromLat[grep(pattern = 'Asia', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lat[3]
+  
+  df_regions$fromLon[grep(pattern = 'Europe', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lon[4]
+  df_regions$fromLat[grep(pattern = 'Europe', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lat[4]
+  
+  df_regions$fromLon[grep(pattern = 'Africa', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lon[1]
+  df_regions$fromLat[grep(pattern = 'Africa', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lat[1]
+  
+  df_regions$fromLon[grep(pattern = 'Americas', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lon[2]
+  df_regions$fromLat[grep(pattern = 'Americas', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lat[2]
+  
+  df_regions$fromLon[grep(pattern = 'Oceania', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lon[5]
+  df_regions$fromLat[grep(pattern = 'Oceania', x = df_regions$From, fixed = TRUE)] <- regionsVal$Lat[5]
+  
   ## Save GeoJSON file
-  sink(paste("./map_genebank_test_lp_v", i, ".json",sep=""))
+  sink(paste("./map_genebank_test_lp_region_v", i, ".json",sep=""))
   
   cat('{')
   cat('"RegionsDensity": {')
@@ -190,12 +210,12 @@ flows <- lapply(1:length(BofoDem), function(i){
   cat('"RegionsCoords":{')
   cat('"type": "FeatureCollection",')
   cat('"features": [')
-  for(j in 1:nrow(df)){
+  for(j in 1:nrow(df_regions)){
     # [lon, lat]
-    cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df$fromLon[j], ', ', df$fromLat[j], ' ], [ ', df$toLon[j], ', ', df$toLat[j], '] ] } },')
-    if(j == nrow(df)){
+    cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df_regions$fromLon[j], ', ', df_regions$fromLat[j], ' ], [ ', df_regions$toLon[j], ', ', df_regions$toLat[j], '] ] } },')
+    if(j == nrow(df_regions)){
       # [lon, lat]
-      cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df$fromLon[j], ', ', df$fromLat[j], ' ], [ ', df$toLon[j], ', ', df$toLat[j], '] ] } }')
+      cat('{ "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ ', df_regions$fromLon[j], ', ', df_regions$fromLat[j], ' ], [ ', df_regions$toLon[j], ', ', df_regions$toLat[j], '] ] } }')
     }
   }; rm(j)
   cat(']')
