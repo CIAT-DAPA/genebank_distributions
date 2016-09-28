@@ -9,7 +9,7 @@
  */
 angular.module('genebanksDistributionApp')
   .controller('MapCtrl', function ($scope, GenebankFactory) {
-    $(".angular-google-map-container").css('height',$(document).height());
+    //$(".angular-google-map-container").css('height',$(document).height());
 
     $scope.map = {
       center: { latitude: 10, longitude: 10 },
