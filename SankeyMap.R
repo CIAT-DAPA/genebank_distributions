@@ -35,7 +35,8 @@ names(GB2Sink)[1:2] <- c("From","To")
 ######### OK, do it ##########
 BofoDem <- list(Source2GB=Source2GB,GB2Sink=GB2Sink)
 
-for(i in 1:length(BofoDem)){  
+i=1
+# for(i in 1:length(BofoDem)){  
   b <- BofoDem[[i]]
   ## harvest nodes
   nodes <- data.frame(name=b[,1:2] %>% unlist %>% as.character() %>% unique())
@@ -48,7 +49,8 @@ for(i in 1:length(BofoDem)){
   ## get back results and save them in coords.csv
   coords <- read.csv("coords.csv")
   
-  bof <- left_join(nodes,coords,by=c("name"="original.address"))
+  bof <- coords[coords$original.address %in% nodes$name,]
+  names(bof)[1] <- "name"
   
   ## OK, now build the df to plot
   b$fromLat <- bof$latitude[match(b$From,bof$name)]
@@ -57,12 +59,51 @@ for(i in 1:length(BofoDem)){
   b$toLon <- bof$longitude[match(b$To,bof$name)]
   
   ##### OK, Start thinking about plotting! Use this awesome guide: http://personal.tcu.edu/kylewalker/interactive-flow-visualization-in-r.html
-  
-  ## Approach one, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy
   ## But first, I have to remove flows to self, since these show up as a line across map:
   df <- b[b$From != b$To,]
   df <- df %>% filter(!is.na(toLon)&!is.na(fromLon))
+  
+  ## Map regions to FROM (or TO nodes)
+  regions <- read.csv("regions.csv",stringsAsFactors = F)
+  df$regions <- regions$Region[match(df$From,regions$Country)]
+  ##################### Approach one, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ##################### 
+  library(plotly)
+  library(nycflights13)
+  library(dplyr)
+  
+  # usa_map <- map_data("usa")
+  world_map <- map_data("world")
 
+  # df <- df[1,]
+  ggplot(df)  + borders("world") + coord_equal() +
+    geom_map(data=world_map, map=world_map,
+                aes(x=long, y=lat, map_id=region),
+                fill="#000000", color="#000000", size=0.15) +
+    geom_curve(data = df, alpha = .2,
+                 aes(x = fromLon, y = fromLat,
+                     xend = toLon, yend = toLat,
+                     size=Val, colour=To),arrow = arrow(angle = 10,length = unit(0.13, "npc")))
+  
+  ### ggplotly test
+  
+  viz <- ggplot(df) + borders("world", fill='black', colour = "black") + coord_equal()
+  viz <- viz + geom_segment(data = df, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(0.13, "npc"))) + theme_bw()
+  viz <- viz + guides(colour = FALSE) + guides(size = FALSE)
+  ggplotly(viz)
+  
+  viz2 <- ggplot(df2) + borders("world", fill='black', colour = "black") + coord_equal()
+  viz2 <- viz2 + geom_segment(data = df2, alpha = .1, aes(x = fromLon, y = fromLat, xend = toLon, yend = toLat, size=Val, colour=To), arrow = arrow(length = unit(0.13, "npc"))) + theme_bw()
+  viz2 <- viz2 + guides(colour = FALSE) + guides(size = FALSE)
+  ggplotly(viz2)
+  
+  p <- subplot(
+    ggplotly(viz),
+    ggplotly(viz2),
+    margin = 0.01
+  ) %>% layout(showlegend = FALSE)
+  p
+  
+  ############## Approach one and a half, plot on 2-d plot. Meh... crossing time-line makes it ugly and messy ###################
   library(geosphere)
 
   flows <- gcIntermediate(df[,5:4], df[,7:6],n=20,sp = TRUE, addStartEnd = T,breakAtDateLine=T)
@@ -122,4 +163,4 @@ for(i in 1:length(BofoDem)){
           ,lat=b$lat.pt,lon=b$lon.pt,value=weights*10, color = "grey")
   # )
   visNetwork::visSave(m,paste("globe-",names(BofoDem)[i],".html",sep=""))
-}
+# }
