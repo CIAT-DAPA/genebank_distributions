@@ -21,6 +21,8 @@ angular.module('genebanksDistributionApp')
         'fallback': '#9f9fa3'
       };
 
+      var format = d3.format(",.0f");
+
       var tooltip = d3.select("body")
         .append("div")
         .attr("id", "tooltip")
@@ -29,6 +31,7 @@ angular.module('genebanksDistributionApp')
         .style("visibility", "hidden")
         //.attr("class", "tooltip")
         .text("a simple tooltip");
+
 
       drawSankey("#chart_sankey", data);
 
@@ -55,8 +58,8 @@ angular.module('genebanksDistributionApp')
             tooltip.transition()
               .duration(200)
               .style("opacity", .9);
-            tooltip.html(link.value)
-              .style("left", (d3.event.pageX) + 10 + "px")
+            tooltip.html(format(link.value))
+              .style("left", (d3.event.pageX) + 20 + "px")
               .style("top", (d3.event.pageY) + "px");
           })
           .on('link:mouseout', function (link) {
