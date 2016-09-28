@@ -18,6 +18,7 @@ angular.module('genebanksDistributionApp')
         'netherlands': '#cf8730',
         'unitedkingdom': '#8B4513',
         'unitedstatesofamerica': '#1E90FF',
+        'in': '#ff0066',
         'fallback': '#9f9fa3'
       };
 
@@ -53,6 +54,27 @@ angular.module('genebanksDistributionApp')
           .spread(true)
           .iterations(0)
           .on('node:click', nodeClick)
+          .on('node:mouseover', function (node) {
+            console.log(node);
+            if (!node.id.endsWith('-gb')) {
+              tooltip.style("visibility", "visible");
+              tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+              tooltip.html('Click on me')
+                .style("left", (d3.event.pageX) + 20 + "px")
+                .style("top", (d3.event.pageY) + "px");
+            }
+          })
+          .on('node:mouseout', function (link) {
+            if (!node.id.endsWith('-gb')) {
+              tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
+              var $tooltip = $("#tooltip");
+              $tooltip.empty();
+            }
+          })
           .on('link:mouseover', function (link) {
             tooltip.style("visibility", "visible");
             tooltip.transition()
@@ -95,9 +117,15 @@ angular.module('genebanksDistributionApp')
         var id = node.id.replace(/(-gb)?(_\d+)?$/, '');
         if (colors[id]) {
           return colors[id];
-        } else if (depth > 0 && node.targetLinks && node.targetLinks.length == 1) {
+        }
+        //else if (node.id.endsWith('_in') || node.id.endsWith('_out')) {
+        else if (node.id.endsWith('_in')) {
+          return colors['in'];
+        }
+        else if (depth < 0 && node.targetLinks && node.targetLinks.length == 1) {
           return color(node.targetLinks[0].source, depth - 1);
-        } else {
+        }
+        else {
           return null;
         }
       }

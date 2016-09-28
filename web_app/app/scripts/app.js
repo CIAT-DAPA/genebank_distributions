@@ -15,3 +15,7 @@ angular
       sankey_depth:1,
       genebanks_geojson: 'data/map_genebanks.json'
   });
+
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
