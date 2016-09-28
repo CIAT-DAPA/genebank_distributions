@@ -11,7 +11,7 @@ str(a)
 a[,1] <- as.character(a[,1])
 a[,2] <- as.character(a[,2])
 a[,3] <- as.character(a[,3])
-a[,4] <- as.numeric(a[,4])
+a[,4] <- as.numeric(as.character(a[,4]))
 
 GeneBanks <- a[,2] %>% unique
 # # Step 0, make 3 levels
