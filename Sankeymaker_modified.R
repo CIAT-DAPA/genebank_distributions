@@ -1,5 +1,6 @@
 library(networkD3)
 library(dplyr)
+library(tidyr)
 library(xlsx)
 
 # remove scientific notation and omit warning advertisements
@@ -9,12 +10,12 @@ options(warn=-1)
 
 # read data in
 
-a <- read.xlsx2("ALL_Origincountry-Tocountry_circosfinal_2016_7_7_avannualwgenebank_share.xlsx",1)
+a <- read.xlsx2("ALL_Origincountry-Tocountry_circosfinal_2016_7_7_avannualwgenebank_share.xlsx", sheetIndex = 1)
 str(a)
 a[,1] <- as.character(a[,1])
 a[,2] <- as.character(a[,2])
 a[,3] <- as.character(a[,3])
-a[,4] <- as.numeric(a[,4])
+a[,4] <- as.numeric(as.character(a[,4]))
 a[,'Genebank_country'] <- paste(a[,'Genebank_country'], '-GB', sep = '')
 GeneBanks <- unique(a[,2])
 
@@ -40,6 +41,11 @@ region2$Origin_region <- as.character(region2$Origin_region)
 region2$Recipient_region <- as.character(region2$Recipient_region)
 region2$Genebank_country <- as.character(region2$Genebank_country)
 region2$Samples <- as.numeric(region2$Samples)
+
+a$Origin <- as.character(a$Origin)
+a$Recipient <- as.character(a$Recipient)
+a$Origin[grep(pattern = "Côte d'Ivoire", x = a$Origin, fixed = TRUE)] <- 'Ivory Coast'
+a$Recipient[grep(pattern = "Côte d'Ivoire", x = a$Recipient, fixed = TRUE)] <- 'Ivory Coast'
 
 #### =============================================================== ###
 #### create sankey to regional level
@@ -119,40 +125,40 @@ s
 
 # identify countries per region and adding to final JSON file
 
-regions <- countryRegions$Origin_region %>% as.character %>% unique %>% sort
-countryRegions <- lapply(regions, function(z){
-  
-  nodes_id <- nodes$id[grep(pattern = z, x = nodes$name, fixed = F)]
-  countryList <- countryRegions$Origin[countryRegions$Origin_region==z] %>% as.character %>% sort
-  
-  if(length(nodes_id) == 2){
-    return(list(id = nodes_id[1],
-                countries = countryList,
-                id = nodes_id[2],
-                countries = countryList))
-  }
-  
-})
-
-countryRegions <- do.call(list, unlist(countryRegions, recursive = F))
-length(countryRegions)
-
-countryRegions2 <- list()
-index <- seq(1, 24, by = 2)
-for(i in 1:length(index)){
-  countryRegions2[[i]] <- list(id = tolower(countryRegions[[index[i]]]),
-                               countries = countryRegions[[index[i]+1]])
-}; rm(i, index)
-
-# Save JSON file with countries per region
-library(jsonlite)
-json_subgroup <- list(nodes = data.frame(name=nodes$name, id=tolower(nodes$id)),
-                      links = flows_coded,
-                      nodes_subgroup = countryRegions2)
-
-sink('sankey_draft_subgroup.json') # redirect console output to a file
-toJSON(json_subgroup, pretty=FALSE)
-sink()
+# regions <- countryRegions$Origin_region %>% as.character %>% unique %>% sort
+# countryRegions <- lapply(regions, function(z){
+#   
+#   nodes_id <- nodes$id[grep(pattern = z, x = nodes$name, fixed = F)]
+#   countryList <- countryRegions$Origin[countryRegions$Origin_region==z] %>% as.character %>% sort
+#   
+#   if(length(nodes_id) == 2){
+#     return(list(id = nodes_id[1],
+#                 countries = countryList,
+#                 id = nodes_id[2],
+#                 countries = countryList))
+#   }
+#   
+# })
+# 
+# countryRegions <- do.call(list, unlist(countryRegions, recursive = F))
+# length(countryRegions)
+# 
+# countryRegions2 <- list()
+# index <- seq(1, 24, by = 2)
+# for(i in 1:length(index)){
+#   countryRegions2[[i]] <- list(id = tolower(countryRegions[[index[i]]]),
+#                                countries = countryRegions[[index[i]+1]])
+# }; rm(i, index)
+# 
+# # Save JSON file with countries per region
+# library(jsonlite)
+# json_subgroup <- list(nodes = data.frame(name=nodes$name, id=tolower(nodes$id)),
+#                       links = flows_coded,
+#                       nodes_subgroup = countryRegions2)
+# 
+# sink('sankey_draft_subgroup.json') # redirect console output to a file
+# toJSON(json_subgroup, pretty=FALSE)
+# sink()
 
 #### =============================================================== ###
 #### create sub-sankey to country level per region
