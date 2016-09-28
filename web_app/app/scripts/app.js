@@ -11,7 +11,7 @@
 angular
   .module('genebanksDistributionApp',  ['swipe','snapscroll','uiGmapgoogle-maps'])
   .value('config',{
-      data_genebanks: 'data/genebanks.json',
+      genebanks_sankey: 'data/genebanks.json',
       sankey_depth:1,
-      genebanks_map: 'data/map_genebanks.json'
+      genebanks_geojson: 'data/map_genebanks.json'
   });

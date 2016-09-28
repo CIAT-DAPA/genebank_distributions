@@ -32,8 +32,7 @@
     <div ng-controller="SankeyCtrl">
       <div id="chart_sankey"></div>
     </div>
-    <div ng-controller="MapCtrl">
-      <h1>Map</h1>
+    <div ng-controller="MapCtrl">      
       <ui-gmap-google-map center='map.center' zoom='map.zoom'>
         <ui-gmap-layer type="Data" show="map.showData" onCreated="map.dataLayerCallback"></ui-gmap-layer>
       </ui-gmap-google-map>
@@ -66,6 +65,7 @@
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-scrollie/dist/angular-scrollie.js"></script>
   <script src="bower_components/angular-snapscroll/dist/angular-snapscroll.js"></script>
   <script src="bower_components/angular-wheelie/dist/angular-wheelie.js"></script>
@@ -88,7 +88,6 @@
   <script src="scripts/controllers/main.js"></script>
   <script src="scripts/controllers/sankey.js"></script>
   <script src="scripts/controllers/map.js"></script>
-  <script src="scripts/services/mapfactory.js"></script>
   <script src="scripts/services/genebankfactory.js"></script>
 
   <script src="scripts/libs/sankey/sankey.js"></script>

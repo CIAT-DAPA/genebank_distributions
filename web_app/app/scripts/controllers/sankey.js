@@ -9,7 +9,7 @@
  */
 angular.module('genebanksDistributionApp')
   .controller('SankeyCtrl', function (GenebankFactory, config) {
-    GenebankFactory.list().then(function (data) {
+    GenebankFactory.getSankeyCoords().then(function (data) {
       var colors = {
         'australia': '#FF0000',
         'canada': '#EE4000',
