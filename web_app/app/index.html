@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Genebank Distribution</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -17,52 +17,36 @@
   <!-- endbuild -->
 </head>
 
-<body ng-app="genebanksDistributionApp">
-  <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-  <!-- Add your site or application content here -->
-  <div class="header">
-    <div class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-          <a class="navbar-brand" href="#/">Genebanks Distribution</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-          <ul class="nav navbar-nav">
-            <li><a href="#/">Home</a></li>
-            <li><a ng-href="#/sankey">Sankey</a></li>
-            <li><a ng-href="#/map">Map</a></li>
-            <!-- <li><a ng-href="#/about">About</a></li> -->
-          </ul>
+<body ng-app="genebanksDistributionApp" ng-controller="MainCtrl">
+  <div class="main" snapscroll enable-arrow-keys snap-index="snapIndex" before-snap="beforeSnap(snapIndex)" after-snap="afterSnap(snapIndex)"
+    snap-animation="snapAnimation" ng-swipe-up="swipeUp()" ng-swipe-down="swipeDown()">
+    <div>
+      <div class="container container-table">
+        <div class="row vertical-center-row">
+          <div class="text-center col-md-4 col-md-offset-4">
+            <h1>GENEBANK DISTRIBUITION</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="container">
-    <div ng-view=""></div>
-  </div>
-
-  <div class="footer">
-    <div class="container">
-      <p><span class="glyphicon glyphicon-heart"></span> CIAT</p>
+    <div ng-controller="SankeyCtrl">
+      <div id="chart_sankey"></div>
+    </div>
+    <div ng-controller="MapCtrl">      
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        <ui-gmap-layer type="Data" show="map.showData" onCreated="map.dataLayerCallback"></ui-gmap-layer>
+      </ui-gmap-google-map>
     </div>
   </div>
+  <ul class="indicators">
+    <li ng-repeat="n in [0,1,2]">
+      <a href="#{{n}}" ng-click="$parent.snapIndex=n"><span ng-class="{active: snapIndex == n}"></span></a>
+    </li>
+  </ul>
 
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <!--
   <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -72,7 +56,8 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-  
+  -->
+
   <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
 
   <!-- build:js(.) scripts/vendor.js -->
@@ -80,9 +65,11 @@
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-scrollie/dist/angular-scrollie.js"></script>
+  <script src="bower_components/angular-snapscroll/dist/angular-snapscroll.js"></script>
+  <script src="bower_components/angular-wheelie/dist/angular-wheelie.js"></script>
+  <script src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
   <script src="bower_components/d3/d3.js"></script>
   <script src="bower_components/d3.chart/d3.chart.js"></script>
   <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
@@ -99,14 +86,12 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/controllers/about.js"></script>
   <script src="scripts/controllers/sankey.js"></script>
+  <script src="scripts/controllers/map.js"></script>
   <script src="scripts/services/genebankfactory.js"></script>
 
   <script src="scripts/libs/sankey/sankey.js"></script>
   <script src="scripts/libs/sankey/d3.chart.sankey.js"></script>
-  <script src="scripts/controllers/map.js"></script>
-  <script src="scripts/services/mapfactory.js"></script>
   <!-- endbuild -->
 </body>
 

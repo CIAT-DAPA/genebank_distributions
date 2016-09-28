@@ -9,50 +9,27 @@
  */
 angular.module('genebanksDistributionApp')
   .controller('SankeyCtrl', function (GenebankFactory, config) {
-    GenebankFactory.list().then(function (data) {
+    GenebankFactory.getSankeyCoords().then(function (data) {
       var colors = {
         'australia': '#FF0000',
         'canada': '#EE4000',
         'cgiar': '#8B0000',
         'germany': '#458B00',
-        'netherlands': '#EED5B7',
+        'netherlands': '#cf8730',
         'unitedkingdom': '#8B4513',
         'unitedstatesofamerica': '#1E90FF',
         'fallback': '#9f9fa3'
       };
 
-      var chart = d3.select("#chart_sankey").append("svg").chart("Sankey.Path");
-      chart.name(label)
-        .colorNodes(function (name, node) {
-          return color(node, 1) || colors.fallback;
-        })
-        .colorLinks(function (link) {
-          return color(link.source, 4) || color(link.target, 1) || colors.fallback;
-        })
-        .nodeWidth(15)
-        .nodePadding(10)
-        .spread(true)
-        .iterations(0)
-        .on('node:click', nodeClick)        
-        .draw(data);
+      drawSankey("#chart_sankey", data);      
 
-      function nodeClick(node) {        
-        var newSankey = [];
-        if (config.sankey_depth == 1) {
-          newSankey = data.subSankey.filter(function (item) {
-            return item.id[0] === node.id;
-          });
-          newSankey=newSankey[0].sankey;
-          config.sankey_depth = 2;
-        }
-        else {
-          newSankey = data;
-          config.sankey_depth = 1;
-        }
-        console.log(newSankey);
-        $("#chart_sankey").html('');
-        var chartClick = d3.select("#chart_sankey").append("svg").chart("Sankey.Path");
-        chartClick.name(label)
+      function drawSankey(container, data) {
+        $(container).html('');
+        var chart = d3.select(container).append("svg")
+          .attr("height", $(document).height())
+          .chart("Sankey.Path");
+
+        chart.name(label)
           .colorNodes(function (name, node) {
             return color(node, 1) || colors.fallback;
           })
@@ -64,7 +41,23 @@ angular.module('genebanksDistributionApp')
           .spread(true)
           .iterations(0)
           .on('node:click', nodeClick)
-          .draw(newSankey);
+          .draw(data);
+      }
+
+      function nodeClick(node) {
+        var newSankey = [];
+        if (config.sankey_depth == 1) {
+          newSankey = data.subSankey.filter(function (item) {
+            return item.id[0] === node.id;
+          });
+          newSankey = newSankey[0].sankey;
+          config.sankey_depth = 2;
+        }
+        else {
+          newSankey = data;
+          config.sankey_depth = 1;
+        }
+        drawSankey("#chart_sankey", newSankey); 
       }
 
       function label(node) {

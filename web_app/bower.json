@@ -4,9 +4,11 @@
   "dependencies": {
     "angular": "^1.4.0",
     "bootstrap": "^3.2.0",
-    "angular-animate": "^1.4.0",
-    "angular-cookies": "^1.4.0",
     "angular-route": "^1.4.0",
+    "angular-snapscroll": "^1.0.0",
+    "angular-wheelie": "^1.1.2",
+    "angular-scrollie": "^1.0.0",
+    "angular-swipe": "0.1.0",
     "d3.chart": "^0.3.0",
     "angular-google-maps": "^2.3.4"
   },
