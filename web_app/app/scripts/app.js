@@ -15,29 +15,3 @@ angular
       sankey_depth:1,
       genebanks_map: 'data/map_genebanks.json'
   });
-/*  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .when('/sankey', {
-        templateUrl: 'views/sankey.html',
-        controller: 'SankeyCtrl',
-        controllerAs: 'csankey'
-      })
-      .when('/map', {
-        templateUrl: 'views/map.html',
-        controller: 'MapCtrl',
-        controllerAs: 'cmap'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });*/
