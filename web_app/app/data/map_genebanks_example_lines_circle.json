@@ -1,0 +1,16 @@
+{
+    "RegionsDensity": {
+        "type": "FeatureCollection",
+        "features": [
+            { "type": "Feature", "geometry": { "type": "Point", "coordinates": [ 133.775136, -25.274398] }, "properties": { "radio": 5 } },
+            { "type": "Feature", "geometry": { "type": "Point", "coordinates": [ -51.92528, -14.235004 ] }, "properties": { "radio": 3.3 } }
+        ]
+    },
+    "RegionsCoords":{
+        "type": "FeatureCollection",
+        "features": [
+            { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ 133.775136, -25.274398 ], [ -95.712891, 37.09024] ] } },
+            { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [ [ -51.92528, -14.235004 ], [ -95.712891, 37.09024] ] } }
+        ]
+    }
+}
