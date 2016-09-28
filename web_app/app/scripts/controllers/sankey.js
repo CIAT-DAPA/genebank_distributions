@@ -21,7 +21,14 @@ angular.module('genebanksDistributionApp')
         'fallback': '#9f9fa3'
       };
 
-      drawSankey("#chart_sankey", data);      
+      var tooltip = d3.select("body")
+        .append("div").attr("id", "tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .text("a simple tooltip");
+
+      drawSankey("#chart_sankey", data);
 
       function drawSankey(container, data) {
         $(container).html('');
@@ -41,6 +48,22 @@ angular.module('genebanksDistributionApp')
           .spread(true)
           .iterations(0)
           .on('node:click', nodeClick)
+          .on('link:mouseover', function (link) {
+            tooltip.style("visibility", "visible");
+            tooltip.transition()
+              .duration(200)
+              .style("opacity", .9);
+            tooltip.html(link.value)
+              .style("left", (d3.event.pageX) + 30 + "px")
+              .style("top", (d3.event.pageY) + "px");
+          })
+          .on('link:mouseout', function (link) {
+            tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+            var $tooltip = $("#tooltip");
+            $tooltip.empty();
+          })
           .draw(data);
       }
 
@@ -57,7 +80,7 @@ angular.module('genebanksDistributionApp')
           newSankey = data;
           config.sankey_depth = 1;
         }
-        drawSankey("#chart_sankey", newSankey); 
+        drawSankey("#chart_sankey", newSankey);
       }
 
       function label(node) {
