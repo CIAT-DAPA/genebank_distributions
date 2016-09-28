@@ -37,9 +37,9 @@ angular.module('genebanksDistributionApp')
       drawSankey("#chart_sankey", data);
 
       function drawSankey(container, data) {
-        $(container).html('');
+        $(container).html('');        
         var chart = d3.select(container).append("svg")
-          .attr("height", $(document).height())
+          .attr("height", $(document).height() - 60)
           .chart("Sankey.Path");
 
         chart.name(label)

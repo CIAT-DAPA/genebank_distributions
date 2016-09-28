@@ -199,3 +199,8 @@ a:hover {
   white-space: nowrap;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.content-slide{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

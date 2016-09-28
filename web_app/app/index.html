@@ -20,19 +20,19 @@
 <body ng-app="genebanksDistributionApp" ng-controller="MainCtrl">
   <div class="main" snapscroll enable-arrow-keys snap-index="snapIndex" before-snap="beforeSnap(snapIndex)" after-snap="afterSnap(snapIndex)"
     snap-animation="snapAnimation" ng-swipe-up="swipeUp()" ng-swipe-down="swipeDown()">
-    <div>
+    <div class="content-slide">
       <div class="container container-table">
         <div class="row vertical-center-row">
           <div class="text-center col-md-4 col-md-offset-4">
-            <h1>GENEBANK DISTRIBUITION</h1>
+            <h1>GENEBANK DISTRIBUTION</h1>
           </div>
         </div>
       </div>
     </div>
-    <div ng-controller="SankeyCtrl">
+    <div class="content-slide" ng-controller="SankeyCtrl">
       <div id="chart_sankey"></div>
     </div>
-    <div ng-controller="MapCtrl">      
+    <div class="content-slide" ng-controller="MapCtrl">      
       <ui-gmap-google-map center='map.center' zoom='map.zoom'>
         <ui-gmap-layer type="Data" show="map.showData" onCreated="map.dataLayerCallback"></ui-gmap-layer>
       </ui-gmap-google-map>
