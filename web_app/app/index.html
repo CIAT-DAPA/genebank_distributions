@@ -25,16 +25,16 @@
         <div class="row vertical-center-row">
           <div class="text-center col-md-10 col-md-offset-1">
             <h1>
-              Distributions of crop diversity from genebanks worldwide:<br />
-              who benefits from whose seeds?
+              Distributions of crop diversity from genebanks worldwide:<br /> who benefits from whose seeds?
             </h1>
             <p class="text-center home_text">
-              A project by by <span class="home_name">Colin K. Khoury</span>, <span class="home_name">Harold A. Achicanoy</span> 
-              and <span class="home_name">Steven Sotelo</span> at the <span class="home_name">International Center for Tropical Agriculture (CIAT)</span>, 
+              A project by by <span class="home_name">Colin K. Khoury</span>, <span class="home_name">Harold A. Achicanoy</span>              and <span class="home_name">Steven Sotelo</span> at the <span class="home_name">International Center for Tropical Agriculture (CIAT)</span>,
               and by <span class="home_name">Amit Kohli</span> at ACDI/VOCA,
             </p>
             <p class="text-center home_text">
-              Version 1.0 (September 2016). This work is licensed under a Creative Commons Attribution 4.0 International (<span class="home_name">CC BY 4.0</span>).
+              Version 1.0 (September 2016). This work is licensed under a Creative Commons Attribution 4.0 International (
+              <span
+                class="home_name">CC BY 4.0</span>).
             </p>
           </div>
         </div>
@@ -43,10 +43,13 @@
     <div class="content-slide" ng-controller="SankeyCtrl">
       <div id="chart_sankey"></div>
     </div>
-    <div class="content-slide" ng-controller="MapCtrl">      
-      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-        <ui-gmap-layer type="Data" show="map.showData" onCreated="map.dataLayerCallback"></ui-gmap-layer>
-      </ui-gmap-google-map>
+    <div class="content-slide" ng-controller="MapCtrl">
+      <div class="container-fluid">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+          <ui-gmap-layer type="Data" show="map.showData" onCreated="map.dataLayerCallback"></ui-gmap-layer>
+        </ui-gmap-google-map>
+      </div>
+
     </div>
   </div>
   <ul class="indicators">

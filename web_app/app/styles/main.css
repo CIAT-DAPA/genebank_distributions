@@ -199,11 +199,6 @@ a:hover {
 
 .angular-google-map-container {
   width: 100%;
-  min-height: 400px;
-  height: 100%;
-  position: relative;
-  top: 0px;
-  left: 0px;
 }
 
 
