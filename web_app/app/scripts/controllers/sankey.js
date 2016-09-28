@@ -15,7 +15,7 @@ angular.module('genebanksDistributionApp')
         'canada': '#EE4000',
         'cgiar': '#8B0000',
         'germany': '#458B00',
-        'netherlands': '#EED5B7',
+        'netherlands': '#cf8730',
         'unitedkingdom': '#8B4513',
         'unitedstatesofamerica': '#1E90FF',
         'fallback': '#9f9fa3'
@@ -49,8 +49,6 @@ angular.module('genebanksDistributionApp')
           newSankey = data;
           config.sankey_depth = 1;
         }
-        console.log(newSankey);
-        $("#chart_sankey").html('');
         var chartClick = d3.select("#chart_sankey").append("svg").chart("Sankey.Path");
         chartClick.name(label)
           .colorNodes(function (name, node) {

@@ -9,7 +9,7 @@
  */
 angular.module('genebanksDistributionApp')
   .controller('MapCtrl', function ($scope, MapFactory) {
-    $scope.map = {
+    /*$scope.map = {
       center: { latitude: 0, longitude: 0 },
       zoom: 2,
       showData: true,
@@ -18,5 +18,5 @@ angular.module('genebanksDistributionApp')
         MapFactory.getRegionDensity(layer);
         MapFactory.getRegionCoords(layer);
       }
-    };
+    };*/
   });

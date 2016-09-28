@@ -9,18 +9,13 @@
  * Main module of the application.
  */
 angular
-  .module('genebanksDistributionApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngRoute',
-    'uiGmapgoogle-maps'
-  ])
+  .module('genebanksDistributionApp',  ['swipe','snapscroll','uiGmapgoogle-maps'])
   .value('config',{
       data_genebanks: 'data/genebanks.json',
       sankey_depth:1,
       genebanks_map: 'data/map_genebanks.json'
-  })
-  .config(function ($routeProvider) {
+  });
+/*  .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -45,4 +40,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  });*/
