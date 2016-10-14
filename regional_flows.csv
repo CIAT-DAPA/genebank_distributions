@@ -1,85 +1,85 @@
 "source","target","value"
 "Africa","Canada-GB",356.133333333333
 "Asia","Canada-GB",776.933333333333
-"Europe","Canada-GB",851.6
+"Europe","Canada-GB",860
 "Latin America and the Caribbean","Canada-GB",135.866666666667
 "North America","Canada-GB",1245.6
 "Oceania","Canada-GB",46.1333333333333
 "Canada-GB","Africa",79.2
-"Canada-GB","Asia",368.266666666667
-"Canada-GB","Europe",405.6
-"Canada-GB","Latin America and the Caribbean",28.8
-"Canada-GB","North America",2519.2
-"Canada-GB","Oceania",11.2
-"Africa","Australia-GB",688
-"Asia","Australia-GB",3192.76363636364
-"Europe","Australia-GB",1265.30909090909
-"Latin America and the Caribbean","Australia-GB",1085.52727272727
-"North America","Australia-GB",827.818181818182
-"Oceania","Australia-GB",1294.65454545455
+"Canada-GB","Asia",368.8
+"Canada-GB","Europe",408.4
+"Canada-GB","Latin America and the Caribbean",28.9333333333333
+"Canada-GB","North America",2523.86666666667
+"Canada-GB","Oceania",11.4666666666667
+"Africa","Australia-GB",688.036363636364
+"Asia","Australia-GB",3207.70909090909
+"Europe","Australia-GB",1318.90909090909
+"Latin America and the Caribbean","Australia-GB",1085.6
+"North America","Australia-GB",827.890909090909
+"Oceania","Australia-GB",1295.67272727273
 "Australia-GB","Africa",69.6363636363636
-"Australia-GB","Asia",718.618181818182
-"Australia-GB","Europe",257.963636363636
+"Australia-GB","Asia",722.509090909091
+"Australia-GB","Europe",261.381818181818
 "Australia-GB","Latin America and the Caribbean",114.909090909091
-"Australia-GB","North America",243.927272727273
-"Australia-GB","Oceania",6949.01818181818
+"Australia-GB","North America",244.872727272727
+"Australia-GB","Oceania",7010.50909090909
 "Africa","CGIAR-GB",11527.3872280294
 "Asia","CGIAR-GB",18793.4421641502
-"Europe","CGIAR-GB",3866.50452961672
+"Europe","CGIAR-GB",3867.11428571429
 "Latin America and the Caribbean","CGIAR-GB",7589.58205574913
 "North America","CGIAR-GB",1662.77830429733
 "Oceania","CGIAR-GB",337.831633759195
-"CGIAR-GB","Africa",6282.87145954317
-"CGIAR-GB","Asia",18952.0943437863
-"CGIAR-GB","Europe",10343.7035036779
-"CGIAR-GB","Latin America and the Caribbean",4461.7614789005
-"CGIAR-GB","North America",2765.02996128533
+"CGIAR-GB","Africa",6283.01780100658
+"CGIAR-GB","Asia",18952.1187340302
+"CGIAR-GB","Europe",10343.8010646535
+"CGIAR-GB","Latin America and the Caribbean",4462.05416182733
+"CGIAR-GB","North America",2765.07874177313
 "CGIAR-GB","Oceania",972.065168408827
-"Africa","Netherlands-GB",370.857142857143
-"Asia","Netherlands-GB",1530.66666666667
-"Europe","Netherlands-GB",2732.09523809524
+"Africa","Netherlands-GB",376.190476190476
+"Asia","Netherlands-GB",1531.61904761905
+"Europe","Netherlands-GB",2780.47619047619
 "Latin America and the Caribbean","Netherlands-GB",710.190476190476
-"North America","Netherlands-GB",404.857142857143
+"North America","Netherlands-GB",405.238095238095
 "Oceania","Netherlands-GB",44.5714285714286
-"Netherlands-GB","Africa",171.142857142857
-"Netherlands-GB","Asia",882
-"Netherlands-GB","Europe",4091.42857142857
-"Netherlands-GB","Latin America and the Caribbean",53.4285714285714
-"Netherlands-GB","North America",492.571428571429
-"Netherlands-GB","Oceania",102.666666666667
+"Netherlands-GB","Africa",173.428571428571
+"Netherlands-GB","Asia",890.666666666667
+"Netherlands-GB","Europe",4128.57142857143
+"Netherlands-GB","Latin America and the Caribbean",53.9047619047619
+"Netherlands-GB","North America",497.52380952381
+"Netherlands-GB","Oceania",104.190476190476
 "Africa","Germany-GB",1850.58823529412
-"Asia","Germany-GB",4728.23529411765
-"Europe","Germany-GB",13202.4705882353
+"Asia","Germany-GB",4728.47058823529
+"Europe","Germany-GB",13530.1176470588
 "Latin America and the Caribbean","Germany-GB",1090.70588235294
-"North America","Germany-GB",1000.47058823529
+"North America","Germany-GB",1000.70588235294
 "Oceania","Germany-GB",97.8823529411765
-"Germany-GB","Africa",1060.70588235294
-"Germany-GB","Asia",2690.35294117647
-"Germany-GB","Europe",16842.4705882353
-"Germany-GB","Latin America and the Caribbean",66.9411764705882
-"Germany-GB","North America",1158.82352941176
-"Germany-GB","Oceania",151.058823529412
+"Germany-GB","Africa",1063.64705882353
+"Germany-GB","Asia",2725.17647058824
+"Germany-GB","Europe",17114.9411764706
+"Germany-GB","Latin America and the Caribbean",67.7647058823529
+"Germany-GB","North America",1174.58823529412
+"Germany-GB","Oceania",152.352941176471
 "Africa","United Kingdom-GB",45.0847457627119
 "Asia","United Kingdom-GB",61.6271186440678
-"Europe","United Kingdom-GB",427.796610169491
+"Europe","United Kingdom-GB",433.084745762712
 "Latin America and the Caribbean","United Kingdom-GB",6.3728813559322
 "North America","United Kingdom-GB",117.694915254237
 "Oceania","United Kingdom-GB",12.0677966101695
 "United Kingdom-GB","Africa",31.3220338983051
-"United Kingdom-GB","Asia",55.6610169491525
-"United Kingdom-GB","Europe",529.35593220339
-"United Kingdom-GB","Latin America and the Caribbean",15.6610169491525
+"United Kingdom-GB","Asia",56.6101694915254
+"United Kingdom-GB","Europe",531.932203389831
+"United Kingdom-GB","Latin America and the Caribbean",17.4237288135593
 "United Kingdom-GB","North America",21.2881355932203
 "United Kingdom-GB","Oceania",17.3559322033898
-"Africa","United States of America-GB",31715.7209302326
-"Asia","United States of America-GB",100527.813953488
-"Europe","United States of America-GB",46459.2558139535
-"Latin America and the Caribbean","United States of America-GB",28326.3255813953
+"Africa","United States of America-GB",31748.1860465116
+"Asia","United States of America-GB",100676.279069767
+"Europe","United States of America-GB",46836.0930232558
+"Latin America and the Caribbean","United States of America-GB",28329.7674418605
 "North America","United States of America-GB",76066.2325581395
 "Oceania","United States of America-GB",3843.44186046512
-"United States of America-GB","Africa",3107.62790697674
-"United States of America-GB","Asia",36875.8139534884
-"United States of America-GB","Europe",17374.511627907
-"United States of America-GB","Latin America and the Caribbean",13333.6744186047
-"United States of America-GB","North America",214835.162790698
-"United States of America-GB","Oceania",1412
+"United States of America-GB","Africa",3112.27906976744
+"United States of America-GB","Asia",36970.3255813954
+"United States of America-GB","Europe",17414.6976744186
+"United States of America-GB","Latin America and the Caribbean",13341.7674418605
+"United States of America-GB","North America",215245.581395349
+"United States of America-GB","Oceania",1415.3488372093

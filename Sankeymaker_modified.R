@@ -19,32 +19,6 @@ a[,4] <- as.numeric(as.character(a[,4]))
 a[,'Genebank_country'] <- paste(a[,'Genebank_country'], '-GB', sep = '')
 GeneBanks <- unique(a[,2])
 
-# omitting smaller regions
-reg2Omit <- c('Africa_East', 'Africa_Southern', 'Africa_Central', 'Africa_West',
-              'Asia_West', 'Asia_Central', 'Asia_East', 'Asia_South', 'Asia_Southeast',
-              'Europe_Eastern_south', 'Europe_Eastern_north', 'Europe_Western_north', 'Europe_Western_south',
-              'America_North', 'America_Caribbean', 'America_Central_and_Mexico',
-              'Pacific_Region_ausnz', 'Mediterranean_SouthandEast')
-for(i in 1:length(reg2Omit)){
-  if(length(which(a$Origin == reg2Omit[i]))>0){
-    a <- a[-which(a$Origin == reg2Omit[i]),]
-    if(length(which(a$Recipient == reg2Omit[i]))>0){
-      a <- a[-which(a$Recipient == reg2Omit[i]),]
-    }
-  }
-}; rm(i, reg2Omit)
-rownames(a) <- 1:nrow(a)
-
-a$Origin <- gsub(pattern = 'China, Taiwan Province of', replacement = 'China', x = a$Origin, fixed = TRUE)
-a$Origin <- gsub(pattern = 'China, Hong Kong SAR', replacement = 'China', x = a$Origin, fixed = TRUE)
-a$Origin <- gsub(pattern = 'China, mainland', replacement = 'China', x = a$Origin, fixed = TRUE)
-
-countriesAux <- unique(a$Origin)
-lapply(countriesAux, function(pattern){
-  count <- grep(pattern = pattern, x = unique(a$Origin), value = T)
-  return(count)
-})
-
 # loading regional data
 
 countryRegions <- read.xlsx2('Countries_gb_data_regions_2016_6_13_sankey_share.xlsx', 1)
