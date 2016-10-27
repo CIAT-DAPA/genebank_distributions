@@ -55,7 +55,6 @@ angular.module('genebanksDistributionApp')
           .iterations(0)
           .on('node:click', nodeClick)
           .on('node:mouseover', function (node) {
-            console.log(node);
             if (!node.id.endsWith('-gb')) {
               tooltip.style("visibility", "visible");
               tooltip.transition()
@@ -80,7 +79,8 @@ angular.module('genebanksDistributionApp')
             tooltip.transition()
               .duration(200)
               .style("opacity", .9);
-            tooltip.html(format(link.value))
+            console.log(link);
+            tooltip.html('From: ' + link.source.name + '' + link.target.name + ': ' + format(link.value))
               .style("left", (d3.event.pageX) + 20 + "px")
               .style("top", (d3.event.pageY) + "px");
           })
@@ -92,6 +92,12 @@ angular.module('genebanksDistributionApp')
             $tooltip.empty();
           })
           .draw(data);
+      }
+
+      function calculateLink(link){
+        if (link.id.endsWith('-gb')) {
+              
+            }
       }
 
       function nodeClick(node) {
